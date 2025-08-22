@@ -1,3 +1,4 @@
+<html lang="en" >
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -33,1007 +34,2671 @@
   <meta name="twitter:image" content="https://i.ibb.co/x8z09vVB/1754946684194.png" />
   <meta name="twitter:site" content="@usernameTwitter" />
   
-  <!-- CSS dan Script -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+    rel="stylesheet"
+  />
   <style>
-   body {
-      font-family: 'Inter', sans-serif;
-      background-color: #fff;
-      color: #000;
-      margin: 0; padding: 0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+    body {
+      font-family: "Roboto", sans-serif;
     }
-    main {
-      flex-grow: 1;
-      padding: 20px;
-    }
-    footer {
-      text-align: center;
-      padding: 15px 10px;
-      background-color: #f0f0f0;
-      font-size: 14px;
-      color: #555;
-    }
-    /* Contoh tombol sederhana */
-    button {
-      padding: 10px 15px;
-      border-radius: 6px;
-      border: 1px solid #333;
-      background: white;
-      cursor: pointer;
-    }
-    /* Capsule floating header shadow and shape */
-    .capsule-header {
-      border-radius: 9999px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-      backdrop-filter: saturate(180%) blur(12px);
-      background-color: rgba(255, 255, 255, 0.95);
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      z-index: 9999;
-      transition: opacity 0.3s ease, visibility 0.3s ease;
-      color: #000;
-    }
-    .capsule-header.hidden {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
+    /* Aspect ratio 16:9 for iframe */
+    .aspect-w-16 {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
       height: 0;
-      padding: 0;
-      margin: 0;
-      overflow: hidden;
     }
-    /* Capsule floating navbar bottom mobile */
-    .capsule-navbar-mobile {
-      border-radius: 9999px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-      backdrop-filter: saturate(180%) blur(12px);
-      background-color: rgba(255, 255, 255, 0.95);
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      z-index: 9999;
-      color: #000;
+    .aspect-w-16 iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 0.5rem;
     }
-    /* Sidebar desktop with rounded corners on right side */
-    .sidebar-desktop {
-      border-top-right-radius: 1.5rem;
-      border-bottom-right-radius: 1.5rem;
-      box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);
-      background-color: #fff;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      color: #000;
-    }
-    /* Scrollbar for autocomplete */
-    #autocomplete-list {
-      max-height: 240px;
+    /* Scrollbar for recommendations */
+    #recommendations {
+      max-height: 70vh;
       overflow-y: auto;
-      scrollbar-width: thin;
-      scrollbar-color: #000 #f0f0f0;
-      background-color: #fff;
-      color: #000;
     }
-    #autocomplete-list::-webkit-scrollbar {
+    /* Scrollbar styling */
+    #recommendations::-webkit-scrollbar {
       width: 6px;
     }
-    #autocomplete-list::-webkit-scrollbar-thumb {
-      background-color: #000;
+    #recommendations::-webkit-scrollbar-thumb {
+      background-color: rgba(156, 163, 175, 0.5);
       border-radius: 3px;
     }
-    /* Article detail content styling */
-    #article-detail img {
-      max-width: 100%;
-      border-radius: 0.5rem;
-      margin-bottom: 1rem;
+    /* Header curved bottom corners and transparent */
+    header {
+      background: rgba(255 255 255 / 0.85);
+      backdrop-filter: saturate(180%) blur(10px);
+      border-bottom-left-radius: 2rem;
+      border-bottom-right-radius: 2rem;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+      z-index: 60;
     }
-    #article-detail iframe {
-      max-width: 100%;
-      margin-bottom: 1rem;
-      border-radius: 0.5rem;
+    /* Capsule bottom nav mobile */
+    #mobile-bottom-nav {
+      position: fixed;
+      bottom: 1.25rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255 255 255 / 0.95);
+      backdrop-filter: saturate(180%) blur(10px);
+      border-radius: 9999px;
+      box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+      display: flex;
+      gap: 2.5rem;
+      padding: 0.5rem 2rem;
+      width: fit-content;
+      z-index: 70;
     }
-    /* Hide desktop nav links in header */
+    #mobile-bottom-nav a {
+      color: #6b7280;
+      font-weight: 600;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: color 0.3s ease;
+    }
+    #mobile-bottom-nav a.active,
+    #mobile-bottom-nav a:hover {
+      color: #dc2626;
+    }
+    /* Sidebar desktop */
+    #sidebar {
+      background: white;
+      border-right: 1px solid #e5e7eb;
+      width: 240px;
+      min-height: calc(100vh - 72px);
+      padding-top: 1.5rem;
+      position: fixed;
+      top: 72px;
+      left: 0;
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    #sidebar a {
+      padding: 0.75rem 1.5rem;
+      font-weight: 600;
+      color: #374151;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      border-radius: 0.75rem;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    #sidebar a.active,
+    #sidebar a:hover {
+      background-color: #fee2e2;
+      color: #b91c1c;
+    }
+    /* Main content with sidebar offset */
+    #main-content {
+      margin-left: 0;
+      transition: margin-left 0.3s ease;
+    }
     @media (min-width: 768px) {
-      header nav {
+      #main-content {
+        margin-left: 240px;
+      }
+      #mobile-bottom-nav {
+        display: none;
+      }
+      #mobile-menu-button {
+        display: none;
+      }
+      nav#mobile-menu {
+        display: none !important;
+      }
+      nav.md\\:flex {
         display: none !important;
       }
     }
-    /* Search bar max width on mobile */
     @media (max-width: 767px) {
-      #search-input {
-        max-width: 200px;
+      #sidebar {
+        display: none;
       }
-      .capsule-header > div.relative {
-        max-width: 200px;
-        margin-left: 0.75rem; /* ml-3 */
-      }
-    }
-    /* Responsive post cards max width */
-    #content-area {
-      max-width: 100% !important;
-      padding-left: 1.5rem !important;
-      padding-right: 1.5rem !important;
-    }
-    @media (min-width: 768px) {
-      #content-area {
-        max-width: 768px !important;
-        padding-left: 2.5rem !important;
-        padding-right: 2.5rem !important;
+      nav.md\\:flex {
+        display: none !important;
       }
     }
-    @media (min-width: 1024px) {
-      #content-area {
-        max-width: 1024px !important;
-        padding-left: 2.5rem !important;
-        padding-right: 2.5rem !important;
-      }
+    /* Scrollbar for recommendations on desktop */
+    #recommendations::-webkit-scrollbar {
+      width: 8px;
     }
-    /* Adjusted padding for main content to reduce top space and keep bottom space */
-    main {
-      padding-top: 48px; /* reduced from 72px */
-      padding-bottom: 72px; /* keep bottom space for navbar */
+    #recommendations::-webkit-scrollbar-thumb {
+      background-color: rgba(156, 163, 175, 0.4);
+      border-radius: 4px;
     }
-    @media (min-width: 768px) {
-      main {
-        padding-top: 0;
-        padding-bottom: 0;
-      }
+    /* Search autocomplete dropdown */
+    #autocomplete-list {
+      position: absolute;
+      background: white;
+      border: 1px solid #ddd;
+      border-top: none;
+      max-height: 240px;
+      overflow-y: auto;
+      width: 100%;
+      z-index: 100;
+      border-bottom-left-radius: 0.375rem;
+      border-bottom-right-radius: 0.375rem;
+      top: 100%;
+      left: 0;
+      box-shadow: 0 4px 6px rgb(0 0 0 / 0.1);
+    }
+    #autocomplete-list div {
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-size: 0.875rem;
+      color: #374151;
+    }
+    #autocomplete-list div:hover, #autocomplete-list .autocomplete-active {
+      background-color: #fee2e2;
+      color: #b91c1c;
+    }
+    /* Truncate description in video player */
+    #video-description {
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: normal;
+      word-break: break-word;
+      transition: max-height 0.3s ease;
+      max-height: 6.5rem; /* approx 4 lines */
+      position: relative;
+    }
+    #video-description.expanded {
+      -webkit-line-clamp: unset;
+      max-height: none;
+    }
+    /* Link styles in description */
+    #video-description a {
+      color: #dc2626;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    /* Video player container for minimize/expand/fullscreen */
+    #video-player-container {
+      position: relative;
+      background: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+      transition: all 0.3s ease;
+      overflow: hidden;
+      max-width: 100%;
+    }
+    #video-player-container.minimized {
+      max-height: 120px;
+      overflow: hidden;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.5rem 1rem;
+    }
+    #video-player-container.minimized iframe {
+      position: static !important;
+      width: 160px !important;
+      height: 90px !important;
+      border-radius: 0.375rem;
+      flex-shrink: 0;
+    }
+    #video-player-container.minimized .video-info {
+      flex-grow: 1;
+      overflow: hidden;
+    }
+    #video-player-container.minimized .video-info h1 {
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.2;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      margin: 0;
+    }
+    #video-player-container.minimized .video-info p {
+      font-size: 0.75rem;
+      color: #6b7280;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    #video-player-container.minimized .controls {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    #video-player-container.fullscreen {
+      position: fixed !important;
+      top: 0;
+      left: 0;
+      width: 100vw !important;
+      height: 100vh !important;
+      max-width: 100vw !important;
+      max-height: 100vh !important;
+      border-radius: 0 !important;
+      z-index: 9999 !important;
+      background: black;
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+    }
+    #video-player-container.fullscreen iframe {
+      position: static !important;
+      width: 100% !important;
+      height: 100% !important;
+      border-radius: 0 !important;
+      flex-grow: 1;
+    }
+    #video-player-container.fullscreen .controls {
+      background: rgba(0,0,0,0.6);
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      color: white;
+    }
+    /* Controls button styles */
+    .controls button {
+      background: transparent;
+      border: none;
+      color: inherit;
+      cursor: pointer;
+      font-size: 1.25rem;
+      padding: 0.25rem;
+      transition: color 0.2s ease;
+    }
+    .controls button:hover {
+      color: #dc2626;
+    }
+    /* Loading spinner */
+    .spinner {
+      border: 4px solid rgba(0,0,0,0.1);
+      border-left-color: #dc2626;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      animation: spin 1s linear infinite;
+      margin: 3rem auto;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
     /* Slider styles */
-    .slider-container {
+    #stream-slider {
       position: relative;
+      width: 100%;
+      max-width: 100%;
       overflow: hidden;
-      border-radius: 1rem;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-      margin-bottom: 2rem;
-      background-color: #fff;
-      color: #000;
+      border-radius: 0.5rem;
+      margin-bottom: 1.5rem;
+      user-select: none;
     }
-    .slider-wrapper {
+    #stream-slider .slides {
       display: flex;
       transition: transform 0.5s ease-in-out;
       will-change: transform;
     }
-    .slider-slide {
+    #stream-slider .slide {
       min-width: 100%;
-      user-select: none;
+      flex-shrink: 0;
       position: relative;
     }
-    .slider-slide img {
+    #stream-slider .slide img {
       width: 100%;
-      height: 300px;
+      height: 200px;
       object-fit: cover;
-      border-radius: 1rem;
+      border-radius: 0.5rem;
+      user-select: none;
     }
-    .slider-caption {
+    #stream-slider .slide-caption {
       position: absolute;
-      bottom: 1.5rem;
-      left: 1.5rem;
-      right: 1.5rem;
-      background: rgba(0,0,0,0.7);
+      bottom: 0.75rem;
+      left: 1rem;
+      right: 1rem;
+      background: rgba(0,0,0,0.5);
       color: white;
-      padding: 1rem 1.5rem;
-      border-radius: 0.75rem;
-      font-size: 1.25rem;
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.375rem;
+      font-size: 1rem;
       font-weight: 600;
-      text-shadow: 0 2px 6px rgba(0,0,0,0.7);
+      line-height: 1.2;
+      user-select: none;
+      max-height: 3rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
-    /* Responsive slider height */
-    @media (max-width: 767px) {
-      .slider-slide img {
-        height: 200px;
-      }
-      .slider-caption {
-        font-size: 1rem;
-        padding: 0.75rem 1rem;
-      }
-    }
-    /* Article detail max width and padding on mobile */
-    #article-detail > article {
-      max-width: 100% !important;
-      padding-left: 1rem !important;
-      padding-right: 1rem !important;
-      color: #000;
-    }
-    @media (min-width: 640px) {
-      #article-detail > article {
-        max-width: 640px !important;
-        padding-left: 2rem !important;
-        padding-right: 2rem !important;
-      }
-    }
-    /* Trending categories container */
+    /* Trending categories */
     #trending-categories {
-      max-width: 1024px;
-      margin: 0 auto 1.5rem auto;
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
       display: flex;
       flex-wrap: wrap;
       gap: 0.75rem;
+      margin-bottom: 1.5rem;
       justify-content: center;
     }
     #trending-categories button {
-      background-color: #f0f0f0;
-      color: #000;
+      background: #fee2e2;
+      color: #b91c1c;
       font-weight: 600;
       padding: 0.5rem 1rem;
       border-radius: 9999px;
-      border: 1px solid #000;
+      border: none;
       cursor: pointer;
       transition: background-color 0.3s ease, color 0.3s ease;
+      white-space: nowrap;
+      user-select: none;
     }
     #trending-categories button.active,
     #trending-categories button:hover {
-      background-color: #000;
-      color: #fff;
+      background-color: #b91c1c;
+      color: white;
     }
-    /* Search input styling */
-    #search-input {
-      background-color: #fff;
-      color: #000;
-      border-color: #000;
+    /* Responsive fixes */
+    .line-clamp-2 {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: normal;
+      word-break: break-word;
     }
-    #search-input::placeholder {
-      color: #666;
+    .line-clamp-4 {
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: normal;
+      word-break: break-word;
     }
-    #search-input:focus {
+    /* Shorts container */
+    #shorts-container {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      gap: 1rem;
+      padding-bottom: 1rem;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    #shorts-container::-webkit-scrollbar {
+      height: 6px;
+    }
+    #shorts-container::-webkit-scrollbar-thumb {
+      background-color: rgba(156, 163, 175, 0.5);
+      border-radius: 3px;
+    }
+    .short-card {
+      flex: 0 0 auto;
+      width: 160px;
+      scroll-snap-align: start;
+      background: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .short-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 16px rgb(0 0 0 / 0.15);
+    }
+    .short-card img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border-bottom: 1px solid #e5e7eb;
+      user-select: none;
+    }
+    .short-card .short-info {
+      padding: 0.5rem 0.75rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .short-card .short-info h4 {
+      font-size: 0.875rem;
+      font-weight: 600;
+      line-height: 1.2;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      white-space: normal;
+      margin: 0;
+      color: #111827;
+    }
+    .short-card .short-info p {
+      font-size: 0.75rem;
+      color: #6b7280;
+      margin-top: 0.25rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* New styles for Shorts vertical view */
+    #shorts-vertical-container {
+      position: fixed;
+      inset: 0;
+      background: black;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 10000;
+    }
+    #shorts-vertical-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 56px;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: saturate(180%) blur(10px);
+      display: flex;
+      align-items: center;
+      padding: 0 1rem;
+      z-index: 10010;
+    }
+    #shorts-vertical-header button#shorts-back-button {
+      color: white;
+      font-size: 1.5rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      margin-right: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      transition: background-color 0.2s ease;
+    }
+    #shorts-vertical-header button#shorts-back-button:hover {
+      background-color: rgba(255,255,255,0.2);
+    }
+    #shorts-vertical-header form#shorts-search-form {
+      flex-grow: 1;
+      position: relative;
+    }
+    #shorts-vertical-header input#shorts-search-input {
+      width: 100%;
+      padding: 0.5rem 2.5rem 0.5rem 1rem;
+      border-radius: 9999px;
+      border: none;
+      font-size: 1rem;
+      background: rgba(255 255 255 / 0.15);
+      color: white;
       outline: none;
-      border-color: #000;
-      box-shadow: 0 0 0 2px rgba(0,0,0,0.3);
+      transition: background-color 0.3s ease;
     }
-    /* Pagination buttons */
-    #pagination button {
-      background-color: #fff;
-      color: #000;
-      border-color: #000;
+    #shorts-vertical-header input#shorts-search-input::placeholder {
+      color: rgba(255 255 255 / 0.7);
     }
-    #pagination button:hover:not(:disabled) {
-      background-color: #000;
-      color: #fff;
+    #shorts-vertical-header input#shorts-search-input:focus {
+      background: rgba(255 255 255 / 0.3);
     }
-    #pagination button:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
+    #shorts-vertical-header button#shorts-search-button {
+      position: absolute;
+      right: 0.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 1.25rem;
+      cursor: pointer;
+      padding: 0;
+    }
+    #shorts-vertical-autocomplete-list {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: rgba(255 255 255 / 0.95);
+      color: #111827;
+      max-height: 240px;
+      overflow-y: auto;
+      border-radius: 0 0 0.375rem 0.375rem;
+      box-shadow: 0 4px 6px rgb(0 0 0 / 0.1);
+      z-index: 10020;
+      display: none;
+    }
+    #shorts-vertical-autocomplete-list div {
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-size: 0.875rem;
+      border-bottom: 1px solid #ddd;
+    }
+    #shorts-vertical-autocomplete-list div:last-child {
+      border-bottom: none;
+    }
+    #shorts-vertical-autocomplete-list div:hover,
+    #shorts-vertical-autocomplete-list .autocomplete-active {
+      background-color: #fee2e2;
+      color: #b91c1c;
+    }
+    #shorts-vertical-video-list {
+      flex-grow: 1;
+      scroll-snap-type: y mandatory;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
+      position: relative;
+      margin-top: 56px;
+      background: black;
+    }
+    .shorts-video-item {
+      scroll-snap-align: start;
+      height: 100vh;
+      width: 100vw;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      user-select: none;
+      overflow: hidden;
+      background: black;
+    }
+    .shorts-video-item iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      pointer-events: auto;
+      background: black;
+    }
+    .shorts-video-info {
+      position: absolute;
+      bottom: 3rem;
+      left: 1rem;
+      right: 1rem;
+      color: white;
+      text-shadow: 0 0 8px rgba(0,0,0,0.8);
+      font-weight: 600;
+      font-size: 1.25rem;
+      line-height: 1.2;
+      max-height: 4.5rem;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+    .shorts-video-channel {
+      position: absolute;
+      bottom: 1.25rem;
+      left: 1rem;
+      color: rgba(255 255 255 / 0.85);
+      font-size: 0.875rem;
+      text-shadow: 0 0 6px rgba(0,0,0,0.7);
+    }
+    /* Loading spinner for shorts */
+    #shorts-loading-spinner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 4px solid rgba(255 255 255 / 0.2);
+      border-left-color: #dc2626;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      animation: spin 1s linear infinite;
+      z-index: 10030;
+    }
+
+    /* Channel slider styles */
+    #channel-slider {
+      position: relative;
+      width: 100%;
+      overflow-x: auto;
+      display: flex;
+      gap: 1rem;
+      padding-bottom: 0.5rem;
+      margin-top: 1rem;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    #channel-slider::-webkit-scrollbar {
+      height: 6px;
+    }
+    #channel-slider::-webkit-scrollbar-thumb {
+      background-color: rgba(156, 163, 175, 0.5);
+      border-radius: 3px;
+    }
+    .channel-card {
+      flex: 0 0 auto;
+      width: 120px;
+      scroll-snap-align: start;
+      background: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0.75rem 0.5rem;
+      user-select: none;
+    }
+    .channel-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 16px rgb(0 0 0 / 0.15);
+    }
+    .channel-card img {
+      width: 72px;
+      height: 72px;
+      border-radius: 9999px;
+      object-fit: cover;
+      margin-bottom: 0.5rem;
+      user-select: none;
+    }
+    .channel-card .channel-name {
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-align: center;
+      color: #111827;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 100%;
+    }
+
+    /* Channel view page styles */
+    #channel-view {
+      max-width: 900px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+      padding: 1.5rem;
+    }
+    #channel-header {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+    #channel-header img {
+      width: 96px;
+      height: 96px;
+      border-radius: 9999px;
+      object-fit: cover;
+      user-select: none;
+    }
+    #channel-info {
+      flex-grow: 1;
+      min-width: 200px;
+    }
+    #channel-info h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      color: #111827;
+    }
+    #channel-info p {
+      color: #6b7280;
+      font-size: 0.875rem;
+      margin-bottom: 0.5rem;
+    }
+    #channel-stats {
+      color: #6b7280;
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+    }
+    #channel-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    #channel-actions button {
+      background-color: #dc2626;
+      color: white;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      user-select: none;
+    }
+    #channel-actions button:hover {
+      background-color: #b91c1c;
+    }
+    #channel-actions button.secondary {
+      background-color: #f3f4f6;
+      color: #374151;
+    }
+    #channel-actions button.secondary:hover {
+      background-color: #e5e7eb;
+    }
+    #channel-description {
+      margin-top: 1rem;
+      color: #374151;
+      white-space: pre-line;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+    /* Channel videos grid */
+    #channel-videos {
+      margin-top: 2rem;
+    }
+    #channel-videos h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #111827;
+    }
+    #channel-videos .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
+      gap: 1rem;
+    }
+
+    /* Comments section */
+    #comments-section {
+      margin-top: 2rem;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+      background: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+      padding: 1.5rem;
+    }
+    #comments-section h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #111827;
+    }
+    #comment-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    #comment-form textarea {
+      resize: vertical;
+      min-height: 80px;
+      padding: 0.75rem;
+      border: 1px solid #d1d5db;
+      border-radius: 0.375rem;
+      font-size: 1rem;
+      font-family: inherit;
+      outline-offset: 2px;
+    }
+    #comment-form button {
+      align-self: flex-end;
+      background-color: #dc2626;
+      color: white;
+      font-weight: 600;
+      padding: 0.5rem 1.25rem;
+      border-radius: 9999px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    #comment-form button:hover {
+      background-color: #b91c1c;
+    }
+    .comment {
+      border-top: 1px solid #e5e7eb;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      display: flex;
+      gap: 1rem;
+    }
+    .comment:first-child {
+      border-top: none;
+    }
+    .comment-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 9999px;
+      background-color: #f3f4f6;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+    .comment-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      user-select: none;
+    }
+    .comment-content {
+      flex-grow: 1;
+    }
+    .comment-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.25rem;
+    }
+    .comment-author {
+      font-weight: 600;
+      color: #111827;
+    }
+    .comment-date {
+      font-size: 0.75rem;
+      color: #6b7280;
+    }
+    .comment-text {
+      color: #374151;
+      white-space: pre-line;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      margin-bottom: 0.5rem;
+    }
+    .comment-actions {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.875rem;
+      color: #6b7280;
+      user-select: none;
+    }
+    .comment-actions button {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: inherit;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0;
+      transition: color 0.2s ease;
+    }
+    .comment-actions button:hover {
+      color: #dc2626;
+    }
+    .comment-actions button.liked {
+      color: #dc2626;
+      font-weight: 600;
+    }
+
+    /* Video view page subscribe/like/dislike/share styles */
+    #video-interactions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    #video-interactions button {
+      background-color: #dc2626;
+      color: white;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    #video-interactions button:hover {
+      background-color: #b91c1c;
+    }
+    #video-interactions button.secondary {
+      background-color: #f3f4f6;
+      color: #374151;
+    }
+    #video-interactions button.secondary:hover {
+      background-color: #e5e7eb;
     }
   </style>
- </head>
- <body class="bg-white min-h-screen flex flex-col md:flex-row text-black">
-  <!-- Sidebar for desktop -->
-  <aside class="hidden md:flex flex-col sidebar-desktop w-64 p-6 sticky top-6 h-[calc(100vh-1.5rem)] text-black">
-   <div class="mb-10 flex items-center space-x-3">
-    <h1 class="text-2xl font-semibold select-none">
-     iNote
-    </h1>
-   </div>
-   <nav class="flex flex-col space-y-4 text-black text-lg font-medium">
-    <a class="flex items-center space-x-3 px-4 py-2 rounded-lg hover:bg-black hover:text-white transition" data-page="beranda" href="#">
-     <i class="fas fa-home fa-lg">
-     </i>
-     <span>
-      Beranda
-     </span>
-    </a>
-    <a class="flex items-center space-x-3 px-4 py-2 rounded-lg hover:bg-black hover:text-white transition" data-page="trending" href="#">
-     <i class="fas fa-fire fa-lg">
-     </i>
-     <span>
-      Trending
-     </span>
-    </a>
-    <a class="flex items-center space-x-3 px-4 py-2 rounded-lg hover:bg-black hover:text-white transition" data-page="donasi" href="#">
-     <i class="fas fa-hand-holding-heart fa-lg">
-     </i>
-     <span>
-      Donasi
-     </span>
-    </a>
-    <a class="flex items-center space-x-3 px-4 py-2 rounded-lg hover:bg-black hover:text-white transition" data-page="chat" href="#">
-     <i class="fas fa-comments fa-lg">
-     </i>
-     <span>
-      Forum
-     </span>
-    </a>
-   </nav>
-   <div class="mt-auto pt-6 text-gray-500 text-sm select-none">
-    © 2024 iNote. All rights reserved.
-   </div>
-  </aside>
-  <!-- Main content area -->
-  <main class="flex-1 flex flex-col min-h-screen md:min-h-full md:overflow-y-auto">
-   <!-- Floating capsule header -->
-   <header class="capsule-header fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[90vw] max-w-3xl flex items-center justify-between px-6 py-3 md:static md:translate-x-0 md:w-full md:max-w-none md:px-10 md:py-5" id="main-header">
-    <h1 class="text-xl font-semibold select-none">
-     iNote
-    </h1>
-    <div class="relative w-full max-w-md ml-4">
-     <input aria-label="Cari artikel" autocomplete="off" class="w-full rounded-full border border-black px-4 py-2 text-black focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent max-w-[200px] md:max-w-md" id="search-input" placeholder="Cari artikel..." type="search"/>
-     <ul class="absolute z-50 w-full bg-white border border-black rounded-b-lg max-h-60 overflow-y-auto mt-0.5 shadow-lg hidden" id="autocomplete-list" role="listbox">
-     </ul>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+  <header class="sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-3 flex items-center justify-between relative">
+      <a href="#" id="logo" class="text-2xl font-bold text-red-600 flex items-center space-x-2 select-none">
+        <i class="fas fa-video"></i>
+        <span>iNote</span>
+      </a>
+      <form id="search-form" class="flex flex-1 max-w-xl mx-4 relative" autocomplete="off" role="search">
+        <input
+          type="search"
+          id="search-input"
+          placeholder="Cari video..."
+          class="flex-grow rounded-full border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-600"
+          required
+          aria-label="Search videos"
+          aria-autocomplete="list"
+          aria-controls="autocomplete-list"
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          role="combobox"
+          spellcheck="false"
+          autocorrect="off"
+          autocapitalize="off"
+        />
+        <button
+          type="submit"
+          class="bg-red-600 hover:bg-red-700 text-white px-4 rounded-full ml-2"
+          aria-label="Search"
+        >
+          <i class="fas fa-search"></i>
+        </button>
+        <div id="autocomplete-list" role="listbox" class="hidden"></div>
+      </form>
+      <nav class="hidden md:flex space-x-6 text-gray-700 font-semibold select-none">
+        <a href="#" data-page="home" class="nav-link hover:text-red-600 flex items-center gap-1">
+          <i class="fas fa-home"></i> Home
+        </a>
+        <a href="#" data-page="trending" class="nav-link hover:text-red-600 flex items-center gap-1">
+          <i class="fas fa-fire"></i> Trending
+        </a>
+        <a href="#" data-page="subscriptions" class="nav-link hover:text-red-600 flex items-center gap-1">
+          <i class="fas fa-play-circle"></i> Subscriptions
+        </a>
+        <a href="#" data-page="shorts" class="nav-link hover:text-red-600 flex items-center gap-1">
+          <i class="fas fa-bolt"></i> Shorts
+        </a>
+      </nav>
     </div>
-   </header>
-   <!-- Blog posts container -->
-   <section class="flex-1 p-6 md:p-10 max-w-4xl mx-auto space-y-10 mt-16 md:mt-6" id="content-area">
-    <h2 class="text-3xl font-semibold mb-6 select-none" id="page-title">
-     Beranda
-    </h2>
-    <!-- Slider container for Beranda -->
-    <div aria-label="Slider gambar CTA" class="slider-container hidden" id="slider-cta">
-     <div class="slider-wrapper" id="slider-wrapper">
-      <div class="slider-slide">
-       <img alt="Gambar promo pertama dengan desain hitam putih elegan dan teks ajakan bertindak" loading="lazy" src="https://inotebloom.vercel.app/gambar/1754948609967.jpg"/>
-       <div class="slider-caption">
-        iNote tempat beritanya anak Gen Z!
-       </div>
-      </div>
-      <div class="slider-slide">
-       <img alt="Gambar promo kedua dengan desain hitam putih minimalis dan teks ajakan bertindak" loading="lazy" src="https://inotebloom.vercel.app/gambar/1754948662730.jpg"/>
-       <div class="slider-caption">
-        Bergabung dengan Forum komunitas iNote Sekarang!
-       </div>
-      </div>
-      <div class="slider-slide">
-       <img alt="Gambar promo ketiga dengan desain hitam putih modern dan teks ajakan bertindak" loading="lazy" src="https://inotebloom.vercel.app/gambar/1754946684194.jpg"/>
-       <div class="slider-caption">
-        Baca Artikel Terbaru Setiap Hari di iNote
-       </div>
-      </div>
-     </div>
-    </div>
-    <!-- Trending categories container -->
-    <div aria-label="Kategori Trending" class="hidden" id="trending-categories" role="list">
-    </div>
-    <div class="space-y-10" id="posts">
-    </div>
-    <div aria-label="Pagination navigation" class="mt-8 flex justify-center items-center space-x-4" id="pagination">
-     <button aria-label="Halaman sebelumnya" class="px-4 py-2 rounded-full border border-black text-black hover:bg-black hover:text-white disabled:opacity-50 disabled:cursor-not-allowed" disabled="" id="prev-page">
-      ← Sebelumnya
-     </button>
-     <div class="text-black font-semibold" id="page-info">
-      Halaman 1
-     </div>
-     <button aria-label="Halaman berikutnya" class="px-4 py-2 rounded-full border border-black text-black hover:bg-black hover:text-white" id="next-page">
-      Berikutnya →
-     </button>
-    </div>
-    <!-- Tambah ikon media sosial di bawah sini -->
-    <div aria-label="Sosial media" class="mt-12 mb-24 flex justify-center space-x-6 text-black">
-     <!-- Instagram -->
-     <a aria-label="Instagram" class="hover:text-gray-700" href="https://instagram.com/yourprofile" rel="noopener" target="_blank">
-      <svg class="h-6 w-6" fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-       <path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm10 2a1 1 0 110 2 1 1 0 010-2zm-5 2.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9zm0 2a2.5 2.5 0 100 5 2.5 2.5 0 000-5z">
-       </path>
-      </svg>
-     </a>
-     <!-- Twitter -->
-     <a aria-label="Twitter" class="hover:text-gray-700" href="https://twitter.com/yourprofile" rel="noopener" target="_blank">
-      <svg class="h-6 w-6" fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-       <path d="M23 3a10.9 10.9 0 01-3.14.86A4.48 4.48 0 0022.4.36a9.05 9.05 0 01-2.88 1.1A4.52 4.52 0 0016.15 0c-2.5 0-4.51 2.01-4.51 4.5 0 .35.04.7.11 1.03-3.75-.19-7.07-1.98-9.3-4.7-.4.67-.62 1.45-.62 2.28 0 1.57.8 2.95 2.03 3.76a4.42 4.42 0 01-2.05-.57v.06c0 2.2 1.57 4.04 3.66 4.46-.38.1-.77.15-1.17.15-.29 0-.57-.03-.84-.08.57 1.78 2.23 3.08 4.2 3.12a9.1 9.1 0 01-5.63 1.95c-.37 0-.73-.02-1.09-.06a12.8 12.8 0 006.94 2.04c8.3 0 12.85-6.87 12.85-12.84 0-.2 0-.42-.02-.62A9.18 9.18 0 0023 3z">
-       </path>
-      </svg>
-     </a>
-     <!-- Facebook -->
-     <a aria-label="Facebook" class="hover:text-gray-700" href="https://facebook.com/yourprofile" rel="noopener" target="_blank">
-      <svg class="h-6 w-6" fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-       <path d="M22 12a10 10 0 10-11.62 9.87v-6.98h-2.3v-2.9h2.3v-2.22c0-2.27 1.35-3.52 3.43-3.52.99 0 2.03.18 2.03.18v2.23h-1.14c-1.13 0-1.48.7-1.48 1.42v1.91h2.52l-.4 2.9h-2.12v6.98A10 10 0 0022 12z">
-       </path>
-      </svg>
-     </a>
-     <!-- YouTube -->
-     <a aria-label="YouTube" class="hover:text-gray-700" href="https://youtube.com/yourchannel" rel="noopener" target="_blank">
-      <svg class="h-6 w-6" fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-       <path d="M19.8 7.2a2.37 2.37 0 00-1.67-1.67C16.87 5 12 5 12 5s-4.87 0-6.13.53a2.37 2.37 0 00-1.67 1.67A24.46 24.46 0 004 12a24.46 24.46 0 00.2 4.8 2.37 2.37 0 001.67 1.67C7.13 19 12 19 12 19s4.87 0 6.13-.53a2.37 2.37 0 001.67-1.67A24.46 24.46 0 0020 12a24.46 24.46 0 00-.2-4.8zM10 15.5v-7l6 3.5-6 3.5z">
-       </path>
-      </svg>
-     </a>
-    </div>
-    <!-- Footer -->
-    <footer class="text-center text-sm text-gray-600 pb-8">
-     © 2024 iNote. All rights reserved.
-    </footer>
-   </section>
-   <!-- Article detail container (hidden by default) -->
-   <section class="flex-1 p-6 md:p-10 max-w-4xl mx-auto mt-16 md:mt-6 hidden" id="article-detail">
-   </section>
-  </main>
-  <!-- Floating capsule bottom navbar for mobile -->
-  <nav class="capsule-navbar-mobile fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[90vw] max-w-md flex justify-between items-center px-8 py-3 md:hidden shadow-lg border border-black bg-white text-black" id="bottom-navbar">
-   <a aria-label="Beranda" class="flex flex-col items-center text-black hover:text-white hover:bg-black transition cursor-pointer rounded-lg px-3 py-1" data-page="beranda" href="#">
-    <i class="fas fa-home fa-lg">
-    </i>
-    <span class="text-xs mt-1">
-     Beranda
-    </span>
-   </a>
-   <a aria-label="Trending" class="flex flex-col items-center text-black hover:text-white hover:bg-black transition cursor-pointer rounded-lg px-3 py-1" data-page="trending" href="#">
-    <i class="fas fa-fire fa-lg">
-    </i>
-    <span class="text-xs mt-1">
-     Trending
-    </span>
-   </a>
-   <a aria-label="Donasi" class="flex flex-col items-center text-black hover:text-white hover:bg-black transition cursor-pointer rounded-lg px-3 py-1" data-page="donasi" href="#">
-    <i class="fas fa-hand-holding-heart fa-lg">
-    </i>
-    <span class="text-xs mt-1">
-     Donasi
-    </span>
-   </a>
-   <a aria-label="Forum" class="flex flex-col items-center text-black hover:text-white hover:bg-black transition cursor-pointer rounded-lg px-3 py-1" data-page="chat" href="#">
-    <i class="fas fa-comments fa-lg">
-    </i>
-    <span class="text-xs mt-1">
-     Forum
-    </span>
-   </a>
-  </nav>
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/689a291b9b9e3f192a4099cd/1j2d315iu';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
-  <script>
-   // Pages and their content handlers
-    const pages = {
-      beranda: {
-        title: "Beranda",
-        description: "Selamat datang di iNote, tempat terbaik untuk membaca artikel terbaru.",
-        fetchPosts: true,
-        trendingSort: false,
-        hasSlider: true,
-        showCategories: false,
-      },
-      trending: {
-        title: "Trending",
-        description: "Artikel-artikel yang sedang populer dan banyak dibaca.",
-        fetchPosts: true,
-        trendingSort: true,
-        hasSlider: false,
-        showCategories: true,
-      },
-      donasi: {
-        title: "Donasi",
-        description: "Dukung kami dengan donasi agar iNote terus berkembang.",
-        fetchPosts: false,
-        content: `
-          <div class="bg-gradient-to-r from-black to-gray-800 rounded-xl shadow-lg p-8 text-white max-w-3xl mx-auto">
-            <h3 class="text-3xl font-bold mb-6 text-center">Donasi untuk iNote</h3>
-            <p class="mb-6 text-center text-lg">Terima kasih atas dukungan Anda! Dengan donasi, iNote dapat terus memberikan konten berkualitas dan fitur terbaik.</p>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
-              <div class="bg-white bg-opacity-20 rounded-lg p-4 hover:bg-opacity-30 transition cursor-pointer text-black">
-                <i class="fas fa-university fa-3x mb-4"></i>
-                <h4 class="font-semibold text-lg mb-2">Transfer Bank</h4>
-                <p>123-456-7890<br/>Bank ABC</p>
-              </div>
-              <div class="bg-white bg-opacity-20 rounded-lg p-4 hover:bg-opacity-30 transition cursor-pointer text-black">
-                <i class="fas fa-mobile-alt fa-3x mb-4"></i>
-                <h4 class="font-semibold text-lg mb-2">OVO / GoPay / Dana</h4>
-                <p>0812-3456-7890</p>
-              </div>
-              <div class="bg-white bg-opacity-20 rounded-lg p-4 hover:bg-opacity-30 transition cursor-pointer text-black">
-                <i class="fab fa-paypal fa-3x mb-4"></i>
-                <h4 class="font-semibold text-lg mb-2">Paypal</h4>
-                <p>donate@inote.com</p>
-              </div>
-            </div>
-            <p class="mt-8 italic text-center text-white/80">Setiap donasi sangat berarti bagi kami.</p>
-          </div>
-        `,
-        hasSlider: false,
-        showCategories: false,
-      },
-      chat: {
-        title: "Forum",
-        description: "Fitur forum untuk berdiskusi dan berinteraksi dengan komunitas iNote secara real-time.",
-        fetchPosts: false,
-        content: `<div class="max-w-4xl mx-auto p-6 text-black">
-          <h3 class="text-2xl font-semibold mb-4 text-center">Forum Komunitas iNote</h3>
-          <p class="mb-6 text-center">Bergabung dan berdiskusi dengan komunitas iNote melalui forum di bawah ini.</p>
-          <div id="forum-container" class="rounded-lg shadow-md overflow-hidden border border-gray-300 p-6" style="min-height: 500px;">
-            <img src="https://placehold.co/600x400/png?text=Ilustrasi+Forum+Diskusi+Komunitas+iNote" alt="Ilustrasi forum diskusi komunitas iNote dengan banyak pengguna berdiskusi secara aktif di layar komputer dan perangkat mobile" class="mx-auto rounded-lg" />
-            <p class="mt-4 text-center text-gray-600 italic">Forum sedang dalam pengembangan. Nantikan fitur lengkapnya segera!</p>
-          </div>
-        </div>`,
-        hasSlider: false,
-        showCategories: false,
-      },
-    };
+  </header>
 
-    // Elements
-    const postsContainer = document.getElementById("posts");
-    const pageTitle = document.getElementById("page-title");
-    const contentArea = document.getElementById("content-area");
-    const pagination = document.getElementById("pagination");
-    const prevPageBtn = document.getElementById("prev-page");
-    const nextPageBtn = document.getElementById("next-page");
-    const pageInfo = document.getElementById("page-info");
+  <!-- Sidebar for desktop -->
+  <aside id="sidebar" aria-label="Sidebar navigation">
+    <a href="#" data-page="home" class="sidebar-link flex items-center gap-3" aria-current="page">
+      <i class="fas fa-home fa-lg"></i> <span>Home</span>
+    </a>
+    <a href="#" data-page="trending" class="sidebar-link flex items-center gap-3">
+      <i class="fas fa-fire fa-lg"></i> <span>Trending</span>
+    </a>
+    <a href="#" data-page="subscriptions" class="sidebar-link flex items-center gap-3">
+      <i class="fas fa-play-circle fa-lg"></i> <span>Subscriptions</span>
+    </a>
+    <a href="#" data-page="shorts" class="sidebar-link flex items-center gap-3">
+      <i class="fas fa-bolt fa-lg"></i> <span>Shorts</span>
+    </a>
+  </aside>
+
+  <!-- Mobile bottom nav -->
+  <nav id="mobile-bottom-nav" aria-label="Mobile bottom navigation" class="md:hidden">
+    <a href="#" data-page="home" class="bottom-nav-link flex items-center gap-2 active" aria-current="page">
+      <i class="fas fa-video"></i> Stream
+    </a>
+    <a href="#" data-page="trending" class="bottom-nav-link flex items-center gap-2">
+      <i class="fas fa-fire"></i> Trending
+    </a>
+    <a href="#" data-page="shorts" class="bottom-nav-link flex items-center gap-2">
+      <i class="fas fa-bolt"></i> Shorts
+    </a>
+  </nav>
+
+  <main id="main-content" class="flex-grow container mx-auto px-4 py-6">
+    <div id="app" class="w-full"></div>
+  </main>
+
+  <footer class="bg-white border-t border-gray-300 py-6 mt-12 text-center text-gray-600 text-sm select-none">
+    &copy; 2024 iNote. All rights reserved.
+  </footer>
+
+  <script>
+    const API_KEY = "AIzaSyCl_lc4YnA-VUqW4uPKBCKB4huzmflgQWM";
+    const YOUTUBE_API = "https://www.googleapis.com/youtube/v3";
+
+    const app = document.getElementById("app");
+    const searchForm = document.getElementById("search-form");
     const searchInput = document.getElementById("search-input");
     const autocompleteList = document.getElementById("autocomplete-list");
-    const articleDetailSection = document.getElementById("article-detail");
-    const sliderContainer = document.getElementById("slider-cta");
-    const sliderWrapper = document.getElementById("slider-wrapper");
-    const mainHeader = document.getElementById("main-header");
-    const bottomNavbar = document.getElementById("bottom-navbar");
-    const trendingCategoriesContainer = document.getElementById("trending-categories");
+    const navLinks = document.querySelectorAll(".nav-link");
+    const sidebarLinks = document.querySelectorAll("#sidebar a.sidebar-link");
+    const bottomNavLinks = document.querySelectorAll("#mobile-bottom-nav a.bottom-nav-link");
 
-    // Blogger API config
-    const API_KEY = "AIzaSyAQ1gZHGVaqmZY8ar4jJoTWuEczqePv9cs";
-    const BLOG_ID = "7443611731055197701";
-    const POSTS_PER_PAGE = 5;
-
-    // State
-    let currentPage = 1;
-    let totalPosts = 0;
-    let currentPosts = [];
-    let currentPageKey = "beranda";
-    let nextPageToken = null;
-    let prevPageTokens = [];
-    let currentArticleId = null;
-    let currentCategoryFilter = null;
-
-    // Slider state
-    let sliderIndex = 0;
-    let sliderInterval = null;
-
-    // Categories for trending page (example categories)
-    const trendingCategories = [
-      "Teknologi",
-      "Bisnis",
-      "Kesehatan",
-      "Pendidikan",
-      "Hiburan",
-      "Olahraga",
-      "Sains",
-      "Travel",
-      "Lifestyle",
-      "Kuliner"
-    ];
-
-    // Fetch posts with pagination support and optional trending sort and category filter
-    async function fetchPosts(pageToken = null, trendingSort = false, category = null) {
-      try {
-        let url = `https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts?key=${API_KEY}&maxResults=${POSTS_PER_PAGE}`;
-        if (pageToken) url += `&pageToken=${pageToken}`;
-        if (category) url += `&labels=${encodeURIComponent(category)}`;
-        const response = await fetch(url);
-        const data = await response.json();
-        if (data.items && data.items.length > 0) {
-          currentPosts = data.items;
-          totalPosts = data.totalItems || 0;
-          nextPageToken = data.nextPageToken || null;
-
-          if (trendingSort) {
-            // Sort posts by published date descending (newest first)
-            currentPosts.sort((a, b) => new Date(b.published) - new Date(a.published));
-          }
-
-          renderPosts(trendingSort);
-          updatePagination();
-        } else {
-          postsContainer.innerHTML =
-            '<p class="text-center text-gray-500">Tidak ada artikel yang ditemukan.</p>';
-          pagination.classList.add("hidden");
-        }
-      } catch (error) {
-        postsContainer.innerHTML =
-          '<p class="text-center text-red-500">Gagal memuat artikel. Silakan coba lagi nanti.</p>';
-        pagination.classList.add("hidden");
-        console.error("Error fetching posts:", error);
-      }
+    // Utility: format view count
+    function formatViewCount(num) {
+      num = Number(num);
+      if (num >= 1_000_000_000) return (num / 1_000_000_000).toFixed(1) + "B views";
+      if (num >= 1_000_000) return (num / 1_000_000).toFixed(1) + "M views";
+      if (num >= 1_000) return (num / 1_000).toFixed(1) + "K views";
+      return num + " views";
     }
 
-    // Render posts cards with optional trending style
-    function renderPosts(trending = false) {
-      postsContainer.innerHTML = "";
-      articleDetailSection.classList.add("hidden");
-      contentArea.classList.remove("hidden");
-      pagination.classList.remove("hidden");
+    // Utility: format date to relative time
+    function timeSince(date) {
+      const seconds = Math.floor((new Date() - new Date(date)) / 1000);
+      let interval = Math.floor(seconds / 31536000);
+      if (interval >= 1) return interval + " year" + (interval > 1 ? "s" : "") + " ago";
+      interval = Math.floor(seconds / 2592000);
+      if (interval >= 1) return interval + " month" + (interval > 1 ? "s" : "") + " ago";
+      interval = Math.floor(seconds / 86400);
+      if (interval >= 1) return interval + " day" + (interval > 1 ? "s" : "") + " ago";
+      interval = Math.floor(seconds / 3600);
+      if (interval >= 1) return interval + " hour" + (interval > 1 ? "s" : "") + " ago";
+      interval = Math.floor(seconds / 60);
+      if (interval >= 1) return interval + " minute" + (interval > 1 ? "s" : "") + " ago";
+      return "Just now";
+    }
 
-      if (trending) {
-        // Trending page: show posts with big featured card + smaller cards
-        // First post big featured
-        const firstPost = currentPosts[0];
-        if (firstPost) {
-          let imgSrc = "https://placehold.co/800x450/png?text=No+Image+Available";
-          const imgMatch = firstPost.content.match(/<img.*?src="(.*?)"/);
-          if (imgMatch && imgMatch[1]) {
-            imgSrc = imgMatch[1];
-          }
-          const publishedDate = new Date(firstPost.published).toLocaleDateString("id-ID", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          });
-          const featuredCard = document.createElement("article");
-          featuredCard.className = "rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 mb-10 cursor-pointer bg-white text-black";
-          featuredCard.innerHTML = `
-            <img src="${imgSrc}" alt="Gambar ilustrasi artikel trending berjudul ${firstPost.title}, dengan desain modern dan menarik" class="w-full h-64 object-cover"/>
-            <div class="p-6 bg-white">
-              <h3 class="text-3xl font-bold text-black mb-3 line-clamp-2">${firstPost.title}</h3>
-              <p class="text-gray-600 mb-4">${publishedDate}</p>
-              <p class="text-gray-800 line-clamp-3">${stripHtml(firstPost.content)}</p>
-              <span class="inline-block mt-4 text-black font-semibold hover:underline cursor-pointer">Baca Selengkapnya &rarr;</span>
-            </div>
-          `;
-          featuredCard.addEventListener("click", () => {
-            showArticleDetail(firstPost.id);
-          });
-          postsContainer.appendChild(featuredCard);
-        }
-        // Remaining posts smaller cards in grid
-        if (currentPosts.length > 1) {
-          const gridContainer = document.createElement("div");
-          gridContainer.className = "grid grid-cols-1 sm:grid-cols-2 gap-6";
-          currentPosts.slice(1).forEach((post) => {
-            let imgSrc = "https://placehold.co/600x400/png?text=No+Image+Available";
-            const imgMatch = post.content.match(/<img.*?src="(.*?)"/);
-            if (imgMatch && imgMatch[1]) {
-              imgSrc = imgMatch[1];
-            }
-            const publishedDate = new Date(post.published).toLocaleDateString("id-ID", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            });
-            const card = document.createElement("article");
-            card.className = "bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col cursor-pointer text-black";
-            card.innerHTML = `
-              <img src="${imgSrc}" alt="Gambar ilustrasi artikel trending berjudul ${post.title}, dengan desain modern dan menarik" class="w-full h-40 object-cover"/>
-              <div class="p-4 flex flex-col flex-1">
-                <h3 class="text-lg font-semibold text-black mb-1 line-clamp-2">${post.title}</h3>
-                <p class="text-gray-600 text-sm mb-2">${publishedDate}</p>
-                <p class="text-gray-800 line-clamp-3 flex-1">${stripHtml(post.content)}</p>
-                <span class="mt-3 text-black font-semibold hover:underline cursor-pointer">Baca Selengkapnya &rarr;</span>
-              </div>
-            `;
-            card.addEventListener("click", () => {
-              showArticleDetail(post.id);
-            });
-            gridContainer.appendChild(card);
-          });
-          postsContainer.appendChild(gridContainer);
-        }
-      } else {
-        // Normal page: simple cards list
-        currentPosts.forEach((post) => {
-          let imgSrc = "https://placehold.co/600x400/png?text=No+Image+Available";
-          const imgMatch = post.content.match(/<img.*?src="(.*?)"/);
-          if (imgMatch && imgMatch[1]) {
-            imgSrc = imgMatch[1];
-          }
-          const publishedDate = new Date(post.published).toLocaleDateString("id-ID", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          });
-          const postCard = document.createElement("article");
-          postCard.className =
-            "bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer text-black";
-          postCard.innerHTML = `
+    // Fetch videos by search query
+    async function fetchVideosBySearch(query, maxResults = 12) {
+      const searchUrl = `${YOUTUBE_API}/search?part=snippet&maxResults=${maxResults}&q=${encodeURIComponent(
+        query
+      )}&type=video&key=${API_KEY}`;
+      const res = await fetch(searchUrl);
+      const data = await res.json();
+      if (!data.items) return [];
+      const videoIds = data.items.map((item) => item.id.videoId).join(",");
+      if (!videoIds) return [];
+      const videosUrl = `${YOUTUBE_API}/videos?part=snippet,statistics,contentDetails&id=${videoIds}&key=${API_KEY}`;
+      const videosRes = await fetch(videosUrl);
+      const videosData = await videosRes.json();
+      return videosData.items || [];
+    }
+
+    // Fetch popular videos (trending)
+    async function fetchPopularVideos(maxResults = 12, categoryId = "") {
+      let url = `${YOUTUBE_API}/videos?part=snippet,statistics,contentDetails&chart=mostPopular&maxResults=${maxResults}&regionCode=US&key=${API_KEY}`;
+      if (categoryId) {
+        url += `&videoCategoryId=${categoryId}`;
+      }
+      const res = await fetch(url);
+      const data = await res.json();
+      return data.items || [];
+    }
+
+    // Fetch subscriptions videos (simulate with channel uploads)
+    async function fetchSubscriptionsVideos(maxResults = 12) {
+      const channelId = "UC_x5XG1OV2P6uZZ5FSM9Ttw";
+      const channelUrl = `${YOUTUBE_API}/channels?part=contentDetails&id=${channelId}&key=${API_KEY}`;
+      const channelRes = await fetch(channelUrl);
+      const channelData = await channelRes.json();
+      if (!channelData.items || !channelData.items[0]) return [];
+      const uploadsPlaylistId = channelData.items[0].contentDetails.relatedPlaylists.uploads;
+      const playlistUrl = `${YOUTUBE_API}/playlistItems?part=snippet&maxResults=${maxResults}&playlistId=${uploadsPlaylistId}&key=${API_KEY}`;
+      const playlistRes = await fetch(playlistUrl);
+      const playlistData = await playlistRes.json();
+      if (!playlistData.items) return [];
+      const videoIds = playlistData.items.map((item) => item.snippet.resourceId.videoId).join(",");
+      if (!videoIds) return [];
+      const videosUrl = `${YOUTUBE_API}/videos?part=snippet,statistics,contentDetails&id=${videoIds}&key=${API_KEY}`;
+      const videosRes = await fetch(videosUrl);
+      const videosData = await videosRes.json();
+      return videosData.items || [];
+    }
+
+    // Fetch shorts videos (simulate by filtering videos with duration < 60s)
+    async function fetchShortsVideos(maxResults = 16, pageToken = "") {
+      // Fetch popular videos and filter by duration < 60s (shorts)
+      let url = `${YOUTUBE_API}/videos?part=snippet,statistics,contentDetails&chart=mostPopular&maxResults=50&regionCode=US&key=${API_KEY}`;
+      if (pageToken) url += `&pageToken=${pageToken}`;
+      const res = await fetch(url);
+      const data = await res.json();
+      if (!data.items) return { items: [], nextPageToken: null };
+      const shorts = data.items.filter(video => {
+        const duration = video.contentDetails?.duration || "PT0S";
+        const seconds = parseDurationToSeconds(duration);
+        return seconds <= 60;
+      });
+      return { items: shorts.slice(0, maxResults), nextPageToken: data.nextPageToken || null };
+    }
+
+    // Parse ISO 8601 duration to seconds
+    function parseDurationToSeconds(isoDuration) {
+      const match = isoDuration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+      const hours = match[1] ? parseInt(match[1]) : 0;
+      const minutes = match[2] ? parseInt(match[2]) : 0;
+      const seconds = match[3] ? parseInt(match[3]) : 0;
+      return hours * 3600 + minutes * 60 + seconds;
+    }
+
+    // Render video card (small for recommendations)
+    function renderVideoCardSmall(video) {
+      const {
+        id,
+        snippet: {
+          title,
+          thumbnails,
+          channelTitle,
+          publishedAt,
+        },
+        statistics,
+      } = video;
+
+      return `
+        <a href="#" class="recommendation-card flex gap-3 p-2 rounded hover:bg-gray-100 transition-colors" data-video-id="${id}" aria-label="Watch video titled ${title}">
+          <img
+            src="${thumbnails.medium.url}"
+            alt="Thumbnail of video titled '${title}' by channel '${channelTitle}'"
+            class="w-28 h-16 object-cover rounded"
+            loading="lazy"
+          />
+          <div class="flex flex-col justify-center overflow-hidden">
+            <h4 class="text-sm font-semibold line-clamp-2 text-gray-900">${title}</h4>
+            <p class="text-xs text-gray-600 truncate">${channelTitle}</p>
+            <p class="text-xs text-gray-500">${formatViewCount(statistics?.viewCount || 0)} • ${timeSince(publishedAt)}</p>
+          </div>
+        </a>
+      `;
+    }
+
+    // Render video list grid (for home/trending/subscriptions/search)
+    function renderVideoList(videos) {
+      if (!videos.length) {
+        return `<p class="text-center text-gray-600 mt-12">Tidak ada video ditemukan.</p>`;
+      }
+      return `
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          ${videos.map(renderVideoCardLarge).join("")}
+        </div>
+      `;
+    }
+
+    // Render large video card (for grid)
+    function renderVideoCardLarge(video) {
+      const {
+        id,
+        snippet: {
+          title,
+          thumbnails,
+          channelTitle,
+          publishedAt,
+        },
+        statistics,
+        contentDetails,
+      } = video;
+
+      const duration = contentDetails?.duration || "PT0S";
+      // Convert ISO 8601 duration to mm:ss
+      function parseDuration(isoDuration) {
+        const match = isoDuration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+        const hours = match[1] ? parseInt(match[1]) : 0;
+        const minutes = match[2] ? parseInt(match[2]) : 0;
+        const seconds = match[3] ? parseInt(match[3]) : 0;
+        let result = "";
+        if (hours > 0) result += hours + ":";
+        result += (minutes < 10 && hours > 0 ? "0" : "") + minutes + ":";
+        result += seconds < 10 ? "0" + seconds : seconds;
+        return result;
+      }
+
+      const videoDuration = parseDuration(duration);
+
+      return `
+        <a href="#" class="video-card group block rounded-lg overflow-hidden shadow-md bg-white hover:shadow-lg transition-shadow" data-video-id="${id}" aria-label="Watch video titled ${title}">
+          <div class="relative">
             <img
-              src="${imgSrc}"
-              alt="Gambar ilustrasi artikel berjudul ${post.title}, dengan desain modern dan menarik"
+              src="${thumbnails.medium.url}"
+              alt="Thumbnail of video titled '${title}' by channel '${channelTitle}'"
               class="w-full h-48 object-cover"
               loading="lazy"
             />
-            <div class="p-6">
-              <h3 class="text-xl font-semibold text-black mb-2 line-clamp-2">${post.title}</h3>
-              <p class="text-gray-600 text-sm mb-4">${publishedDate}</p>
-              <p class="text-gray-800 line-clamp-3">${stripHtml(post.content)}</p>
-              <span class="inline-block mt-4 text-black font-semibold hover:underline cursor-pointer">Baca Selengkapnya &rarr;</span>
+            <span class="absolute bottom-2 right-2 bg-black bg-opacity-75 text-white text-xs px-1 rounded">${videoDuration}</span>
+          </div>
+          <div class="p-3">
+            <h3 class="text-sm font-semibold line-clamp-2 group-hover:text-red-600">${title}</h3>
+            <p class="text-xs text-gray-600 mt-1">${channelTitle}</p>
+            <p class="text-xs text-gray-500">${formatViewCount(statistics?.viewCount || 0)} • ${timeSince(publishedAt)}</p>
+          </div>
+        </a>
+      `;
+    }
+
+    // Render shorts card (for shorts page)
+    function renderShortCard(video) {
+      const {
+        id,
+        snippet: {
+          title,
+          thumbnails,
+          channelTitle,
+          publishedAt,
+        },
+        statistics,
+        contentDetails,
+      } = video;
+
+      return `
+        <a href="#" class="short-card" data-video-id="${id}" aria-label="Watch short video titled ${title}">
+          <img
+            src="${thumbnails.high?.url || thumbnails.medium?.url || thumbnails.default?.url}"
+            alt="Thumbnail of short video titled '${title}' by channel '${channelTitle}'"
+            loading="lazy"
+          />
+          <div class="short-info">
+            <h4>${title}</h4>
+            <p>${channelTitle}</p>
+          </div>
+        </a>
+      `;
+    }
+
+    // Convert URLs in text to clickable links
+    function linkify(text) {
+      if (!text) return "";
+      const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+      return text.replace(urlRegex, (url) => {
+        const safeUrl = url.replace(/"/g, "&quot;");
+        return `<a href="${safeUrl}" target="_blank" rel="noopener noreferrer">${url}</a>`;
+      });
+    }
+
+    // Render loading spinner
+    function renderLoading() {
+      return `<div class="spinner" role="status" aria-label="Memuat"></div>`;
+    }
+
+    // Render slider for stream page
+    function renderStreamSlider(videos) {
+      if (!videos.length) return "";
+      return `
+        <div id="stream-slider" aria-label="Slider gambar video populer" role="region">
+          <div class="slides">
+            ${videos.slice(0,5).map(video => {
+              const { id, snippet } = video;
+              const title = snippet.title;
+              const thumb = snippet.thumbnails.high?.url || snippet.thumbnails.medium?.url || snippet.thumbnails.default?.url;
+              return `
+                <div class="slide" data-video-id="${id}">
+                  <img src="${thumb}" alt="Gambar slider video berjudul '${title}'" loading="lazy" />
+                  <div class="slide-caption">${title}</div>
+                </div>
+              `;
+            }).join("")}
+          </div>
+        </div>
+      `;
+    }
+
+    // Render trending categories
+    const trendingCategories = [
+      { id: "", name: "Semua" },
+      { id: "1", name: "Film & Animasi" },
+      { id: "2", name: "Mobil & Kendaraan" },
+      { id: "10", name: "Musik" },
+      { id: "15", name: "Hewan Peliharaan & Hewan" },
+      { id: "17", name: "Olahraga" },
+      { id: "20", name: "Game" },
+      { id: "22", name: "Orang & Blog" },
+      { id: "23", name: "Komedi" },
+      { id: "24", name: "Hiburan" },
+      { id: "25", name: "Berita & Politik" },
+      { id: "26", name: "Howto & Gaya Hidup" },
+      { id: "27", name: "Pendidikan" },
+      { id: "28", name: "Ilmiah & Teknologi" },
+    ];
+
+    function renderTrendingCategories(selectedId) {
+      return `
+        <div id="trending-categories" role="list" aria-label="Kategori Trending">
+          ${trendingCategories.map(cat => `
+            <button role="listitem" data-category-id="${cat.id}" class="${cat.id === selectedId ? "active" : ""}" aria-pressed="${cat.id === selectedId}">
+              ${cat.name}
+            </button>
+          `).join("")}
+        </div>
+      `;
+    }
+
+    // Render channel slider
+    function renderChannelSlider(channels) {
+      if (!channels.length) return "";
+      return `
+        <section aria-label="Slider channel populer" class="mt-6">
+          <h2 class="text-xl font-semibold mb-3">Channel Populer</h2>
+          <div id="channel-slider" tabindex="0">
+            ${channels.map(channel => {
+              const { id, snippet } = channel;
+              const channelId = id.channelId || id;
+              const title = snippet.title;
+              const thumb = snippet.thumbnails?.default?.url || "https://placehold.co/72x72?text=Channel";
+              return `
+                <div class="channel-card" data-channel-id="${channelId}" tabindex="0" aria-label="Lihat channel ${title}">
+                  <img src="${thumb}" alt="Foto profil channel ${title}" loading="lazy" />
+                  <div class="channel-name" title="${title}">${title}</div>
+                </div>
+              `;
+            }).join("")}
+          </div>
+        </section>
+      `;
+    }
+
+    // Render video player page with recommendations, channel slider, and controls + description truncate/expand + interactions
+    function renderVideoPlayerPage(video, recommendations, channels) {
+      const {
+        id,
+        snippet: {
+          title,
+          description,
+          channelTitle,
+          publishedAt,
+          channelId,
+          tags = [],
+        },
+        statistics,
+      } = video;
+
+      return `
+        <div class="flex flex-col md:flex-row gap-8 max-w-7xl mx-auto">
+          <section class="flex-grow max-w-full md:max-w-3xl flex flex-col gap-4">
+            <div id="video-player-container" class="relative" aria-label="Video player container">
+              <div class="controls flex justify-between items-center p-2 bg-white rounded-t-md shadow-sm">
+                <button id="back-button" aria-label="Kembali ke halaman sebelumnya" class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded shadow inline-flex items-center gap-2">
+                  <i class="fas fa-arrow-left"></i> Kembali
+                </button>
+                <div class="flex gap-2">
+                  <button id="minimize-button" aria-label="Minimize video player" title="Minimize">
+                    <i class="fas fa-window-minimize"></i>
+                  </button>
+                  <button id="expand-button" aria-label="Expand video player" title="Expand" class="hidden">
+                    <i class="fas fa-window-maximize"></i>
+                  </button>
+                  <button id="fullscreen-button" aria-label="Toggle fullscreen video player" title="Fullscreen">
+                    <i class="fas fa-expand"></i>
+                  </button>
+                  <button id="exit-fullscreen-button" aria-label="Exit fullscreen video player" title="Exit Fullscreen" class="hidden">
+                    <i class="fas fa-compress"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="aspect-w-16">
+                <iframe
+                  src="https://www.youtube.com/embed/${id}"
+                  title="${title}"
+                  allowfullscreen
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  aria-label="Video player for ${title}"
+                ></iframe>
+              </div>
             </div>
-          `;
-          postCard.addEventListener("click", () => {
-            showArticleDetail(post.id);
-          });
-          postsContainer.appendChild(postCard);
-        });
-      }
-      pagination.classList.toggle("hidden", !pages[currentPageKey].fetchPosts);
+            <h1 class="text-2xl font-bold mt-2 mb-1 line-clamp-2">${title}</h1>
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between text-gray-600 text-sm mb-2">
+              <div>
+                <a href="#" id="channel-link" data-channel-id="${channelId}" class="font-semibold hover:text-red-600">${channelTitle}</a> • ${timeSince(publishedAt)}
+              </div>
+              <div>
+                <i class="fas fa-eye"></i> ${formatViewCount(statistics?.viewCount || 0)}
+              </div>
+            </div>
+            <div id="video-interactions" role="region" aria-label="Video interactions">
+              <button id="subscribe-button" aria-pressed="false" aria-label="Subscribe ke channel ${channelTitle}">
+                <i class="fas fa-bell"></i> Subscribe
+              </button>
+              <button id="like-button" aria-pressed="false" aria-label="Like video ${title}" class="secondary">
+                <i class="fas fa-thumbs-up"></i> Like
+              </button>
+              <button id="dislike-button" aria-pressed="false" aria-label="Dislike video ${title}" class="secondary">
+                <i class="fas fa-thumbs-down"></i> Dislike
+              </button>
+              <button id="share-button" aria-label="Share video ${title}" class="secondary">
+                <i class="fas fa-share"></i> Share
+              </button>
+            </div>
+            <div>
+              <p id="video-description" class="whitespace-pre-line text-gray-700">${linkify(description) || "Tidak ada deskripsi."}</p>
+              <button id="toggle-description" class="text-red-600 font-semibold mt-1 focus:outline-none" aria-expanded="false" aria-controls="video-description">Lihat semua</button>
+            </div>
+            ${renderChannelSlider(channels)}
+          </section>
+          <aside id="recommendations" class="md:w-80 overflow-y-auto" aria-label="Rekomendasi video">
+            <h2 class="text-lg font-semibold mb-4">Rekomendasi</h2>
+            <div class="flex flex-col gap-3">
+              ${recommendations.map(renderVideoCardSmall).join("")}
+            </div>
+          </aside>
+        </div>
+      `;
     }
 
-    // Strip HTML helper
-    function stripHtml(html) {
-      const tmp = document.createElement("div");
-      tmp.innerHTML = html;
-      let text = tmp.textContent || tmp.innerText || "";
-      if (text.length > 200) {
-        text = text.substring(0, 197) + "...";
-      }
-      return text;
+    // Render channel view page with subscribe, like, dislike, share, comments styled like YouTube
+    function renderChannelViewPage(channel, videos) {
+      const {
+        id,
+        snippet,
+        statistics,
+        brandingSettings,
+      } = channel;
+
+      const channelId = id;
+      const title = snippet.title;
+      const description = snippet.description || "";
+      const thumbnail = snippet.thumbnails?.high?.url || snippet.thumbnails?.default?.url || "https://placehold.co/96x96?text=Channel";
+      const subscriberCount = statistics?.subscriberCount || 0;
+      const videoCount = statistics?.videoCount || 0;
+      const viewCount = statistics?.viewCount || 0;
+
+      return `
+        <section id="channel-view" aria-label="Halaman channel ${title}">
+          <div id="channel-header">
+            <img src="${thumbnail}" alt="Foto profil channel ${title}" loading="lazy" />
+            <div id="channel-info">
+              <h1>${title}</h1>
+              <p>${subscriberCount} subscriber${subscriberCount != 1 ? "s" : ""} • ${videoCount} video${videoCount != 1 ? "s" : ""} • ${formatViewCount(viewCount)}</p>
+              <div id="channel-actions">
+                <button id="subscribe-button" aria-pressed="false" aria-label="Subscribe ke channel ${title}">
+                  <i class="fas fa-bell"></i> Subscribe
+                </button>
+                <button id="like-button" aria-pressed="false" aria-label="Like channel ${title}" class="secondary">
+                  <i class="fas fa-thumbs-up"></i> Like
+                </button>
+                <button id="dislike-button" aria-pressed="false" aria-label="Dislike channel ${title}" class="secondary">
+                  <i class="fas fa-thumbs-down"></i> Dislike
+                </button>
+                <button id="share-button" aria-label="Share channel ${title}" class="secondary">
+                  <i class="fas fa-share"></i> Share
+                </button>
+              </div>
+              <div id="channel-description">${linkify(description)}</div>
+            </div>
+          </div>
+          <div id="channel-videos">
+            <h2>Video dari ${title}</h2>
+            <div class="grid">
+              ${videos.length ? videos.map(renderVideoCardLarge).join("") : `<p class="text-gray-600">Tidak ada video ditemukan.</p>`}
+            </div>
+          </div>
+          <section id="comments-section" aria-label="Komentar channel ${title}">
+            <h3>Komentar</h3>
+            <form id="comment-form" aria-label="Form tambah komentar">
+              <textarea id="comment-textarea" placeholder="Tulis komentar..." required aria-required="true"></textarea>
+              <button type="submit">Kirim</button>
+            </form>
+            <div id="comments-list" aria-live="polite" aria-relevant="additions"></div>
+          </section>
+        </section>
+      `;
     }
 
-    // Update pagination buttons and info
-    function updatePagination() {
-      pageInfo.textContent = `Halaman ${currentPage}`;
-      prevPageBtn.disabled = currentPage === 1;
-      nextPageBtn.disabled = !nextPageToken;
+    // Render shorts page (default horizontal scroll)
+    function renderShortsPage(shorts) {
+      if (!shorts.length) {
+        return `<p class="text-center text-gray-600 mt-12">Tidak ada video shorts ditemukan.</p>`;
+      }
+      return `
+        <h2 class="text-xl font-semibold mb-6">Shorts</h2>
+        <div id="shorts-container" tabindex="0" aria-label="Daftar video shorts">
+          ${shorts.map(renderShortCard).join("")}
+        </div>
+      `;
     }
 
-    // Load page by pageToken
-    async function loadPage(pageToken = null, isNext = true) {
-      if (isNext) {
-        if (pageToken) prevPageTokens.push(pageToken);
-      } else {
-        prevPageTokens.pop();
-      }
-      await fetchPosts(pageToken, pages[currentPageKey].trendingSort, currentCategoryFilter);
+    // Render Shorts vertical page (TikTok/Reels style)
+    function renderShortsVerticalPage(videos) {
+      return `
+        <div id="shorts-vertical-container" role="region" aria-label="Video Shorts Vertikal">
+          <header id="shorts-vertical-header">
+            <button id="shorts-back-button" aria-label="Kembali ke halaman sebelumnya"><i class="fas fa-arrow-left"></i></button>
+            <form id="shorts-search-form" autocomplete="off" role="search">
+              <input
+                type="search"
+                id="shorts-search-input"
+                placeholder="Cari video..."
+                aria-label="Cari video shorts"
+                spellcheck="false"
+                autocorrect="off"
+                autocapitalize="off"
+              />
+              <button type="submit" id="shorts-search-button" aria-label="Search"><i class="fas fa-search"></i></button>
+              <div id="shorts-vertical-autocomplete-list" role="listbox"></div>
+            </form>
+          </header>
+          <main id="shorts-vertical-video-list" tabindex="0">
+            ${videos.map(video => {
+              const { id, snippet } = video;
+              const title = snippet.title;
+              const channelTitle = snippet.channelTitle;
+              return `
+                <article class="shorts-video-item" data-video-id="${id}" tabindex="0" aria-label="Video short berjudul ${title} oleh channel ${channelTitle}">
+                  <iframe
+                    src="https://www.youtube.com/embed/${id}?autoplay=0&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&playsinline=1"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                    title="${title}"
+                    loading="lazy"
+                    aria-hidden="true"
+                  ></iframe>
+                  <div class="shorts-video-info">${title}</div>
+                  <div class="shorts-video-channel">${channelTitle}</div>
+                </article>
+              `;
+            }).join('')}
+            <div id="shorts-loading-spinner" class="hidden" aria-hidden="true"></div>
+          </main>
+        </div>
+      `;
     }
 
-    // Navigation page change handler
-    async function changePage(pageKey) {
-      if (!pages[pageKey]) return;
-      currentPageKey = pageKey;
-      currentPage = 1;
-      prevPageTokens = [];
-      nextPageToken = null;
-      currentArticleId = null;
-      currentCategoryFilter = null;
-      pageTitle.textContent = pages[pageKey].title;
-      postsContainer.innerHTML = "";
-      pagination.classList.add("hidden");
-      articleDetailSection.classList.add("hidden");
-      contentArea.classList.remove("hidden");
+    // Show page function to handle routing and rendering
+    async function showPage(page, options = {}) {
+      // Remove active class from nav links and sidebar and bottom nav
+      navLinks.forEach((link) => link.classList.remove("text-red-600"));
+      sidebarLinks.forEach((link) => {
+        link.classList.remove("bg-red-100", "text-red-600");
+        link.removeAttribute("aria-current");
+      });
+      bottomNavLinks.forEach((link) => link.classList.remove("active"));
 
-      // Show or hide slider
-      if (pages[pageKey].hasSlider) {
-        sliderContainer.classList.remove("hidden");
-        startSlider();
-      } else {
-        sliderContainer.classList.add("hidden");
-        stopSlider();
-      }
-
-      // Show header and bottom navbar
-      mainHeader.classList.remove("hidden");
-      bottomNavbar.classList.remove("hidden");
-
-      // Show or hide categories container
-      if (pages[pageKey].showCategories) {
-        trendingCategoriesContainer.classList.remove("hidden");
-        renderCategories();
-      } else {
-        trendingCategoriesContainer.classList.add("hidden");
-        trendingCategoriesContainer.innerHTML = "";
-      }
-
-      if (pages[pageKey].fetchPosts) {
-        pagination.classList.remove("hidden");
-        await fetchPosts(null, pages[pageKey].trendingSort, currentCategoryFilter);
-      } else {
-        pagination.classList.add("hidden");
-        postsContainer.innerHTML = pages[pageKey].content || "";
-      }
-    }
-
-    // Show article detail by post ID
-    async function showArticleDetail(postId) {
-      try {
-        const url = `https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts/${postId}?key=${API_KEY}`;
-        const response = await fetch(url);
-        const post = await response.json();
-        if (post) {
-          currentArticleId = postId;
-          pageTitle.textContent = post.title;
-          pagination.classList.add("hidden");
-          contentArea.classList.add("hidden");
-          articleDetailSection.classList.remove("hidden");
-          sliderContainer.classList.add("hidden");
-          stopSlider();
-
-          // Hide header and bottom navbar on article detail
-          mainHeader.classList.add("hidden");
-          bottomNavbar.classList.add("hidden");
-          trendingCategoriesContainer.classList.add("hidden");
-
-          articleDetailSection.innerHTML = `
-            <article class="bg-white rounded-lg shadow-md p-6 max-w-4xl mx-auto text-black">
-              <h1 class="text-4xl font-bold mb-4">${post.title}</h1>
-              <p class="text-gray-600 mb-6">${new Date(post.published).toLocaleDateString("id-ID", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}</p>
-              <div id="article-detail-content" class="prose max-w-none text-black">${post.content}</div>
-              <button id="back-to-list" class="mt-8 px-6 py-3 bg-black text-white rounded-full hover:bg-gray-800 transition">← Kembali ke ${pages[currentPageKey].title}</button>
-            </article>
-          `;
-          document.getElementById("back-to-list").addEventListener("click", () => {
-            pageTitle.textContent = pages[currentPageKey].title;
-            articleDetailSection.classList.add("hidden");
-            contentArea.classList.remove("hidden");
-            pagination.classList.toggle("hidden", !pages[currentPageKey].fetchPosts);
-            if (pages[currentPageKey].hasSlider) {
-              sliderContainer.classList.remove("hidden");
-              startSlider();
-            }
-            if (pages[currentPageKey].showCategories) {
-              trendingCategoriesContainer.classList.remove("hidden");
-            }
-            // Show header and bottom navbar again
-            mainHeader.classList.remove("hidden");
-            bottomNavbar.classList.remove("hidden");
-            // Scroll top
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          });
-          // Scroll top
-          window.scrollTo({ top: 0, behavior: "smooth" });
+      // Add active class to current page nav links
+      document.querySelectorAll(`[data-page="${page}"]`).forEach((el) => {
+        if (el.closest("#sidebar")) {
+          el.classList.add("bg-red-100", "text-red-600");
+          el.setAttribute("aria-current", "page");
+        } else if (el.closest("#mobile-bottom-nav")) {
+          el.classList.add("active");
+          el.setAttribute("aria-current", "page");
         } else {
-          alert("Artikel tidak ditemukan.");
+          el.classList.add("text-red-600");
         }
-      } catch (error) {
-        alert("Gagal memuat detail artikel.");
-        console.error("Error fetching article detail:", error);
-      }
-    }
+      });
 
-    // Render categories buttons for trending page
-    function renderCategories() {
-      trendingCategoriesContainer.innerHTML = "";
-      trendingCategories.forEach(category => {
-        const btn = document.createElement("button");
-        btn.textContent = category;
-        btn.className = currentCategoryFilter === category ? "active" : "";
-        btn.addEventListener("click", async () => {
-          if (currentCategoryFilter === category) {
-            currentCategoryFilter = null;
-            btn.classList.remove("active");
-          } else {
-            currentCategoryFilter = category;
-            // Remove active from all buttons
-            [...trendingCategoriesContainer.children].forEach(b => b.classList.remove("active"));
-            btn.classList.add("active");
+      if (page === "home") {
+        app.innerHTML = `<h2 class="text-xl font-semibold mb-6">Video Populer</h2>` + renderLoading();
+        try {
+          const videos = await fetchPopularVideos(16);
+          // Render slider + video list
+          const sliderHTML = renderStreamSlider(videos);
+          app.innerHTML = `<h2 class="text-xl font-semibold mb-6">Video Populer</h2>${sliderHTML}` + renderVideoList(videos);
+          initSlider();
+        } catch (e) {
+          app.innerHTML = `<p class="text-center text-red-600">Gagal memuat video populer.</p>`;
+        }
+      } else if (page === "trending") {
+        const selectedCategory = options.categoryId || "";
+        app.innerHTML = `<h2 class="text-xl font-semibold mb-6">Trending</h2>` + renderTrendingCategories(selectedCategory) + renderLoading();
+        try {
+          const videos = await fetchPopularVideos(16, selectedCategory);
+          // Fetch popular channels for slider below trending videos
+          const channels = await fetchPopularChannels(15);
+          app.innerHTML = `<h2 class="text-xl font-semibold mb-6">Trending</h2>` + renderTrendingCategories(selectedCategory) + renderVideoList(videos) + renderChannelSlider(channels);
+          // Add category button listeners
+          const categoryButtons = document.querySelectorAll("#trending-categories button");
+          categoryButtons.forEach(btn => {
+            btn.addEventListener("click", () => {
+              if (btn.classList.contains("active")) return;
+              const catId = btn.getAttribute("data-category-id");
+              history.pushState({ page: "trending", categoryId: catId }, "", `#trending?categoryId=${catId}`);
+              showPage("trending", { categoryId: catId });
+              window.scrollTo(0, 0);
+            });
+          });
+          // Add channel slider click listeners
+          const channelSlider = document.getElementById("channel-slider");
+          if (channelSlider) {
+            channelSlider.querySelectorAll(".channel-card").forEach(card => {
+              card.addEventListener("click", () => {
+                const channelId = card.getAttribute("data-channel-id");
+                if (channelId) {
+                  history.pushState({ page: "channel", channelId }, "", `#channel?id=${channelId}`);
+                  showPage("channel", { channelId });
+                  window.scrollTo(0, 0);
+                }
+              });
+              card.addEventListener("keydown", (e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  const channelId = card.getAttribute("data-channel-id");
+                  if (channelId) {
+                    history.pushState({ page: "channel", channelId }, "", `#channel?id=${channelId}`);
+                    showPage("channel", { channelId });
+                    window.scrollTo(0, 0);
+                  }
+                }
+              });
+            });
           }
-          currentPage = 1;
-          prevPageTokens = [];
-          nextPageToken = null;
-          await fetchPosts(null, pages[currentPageKey].trendingSort, currentCategoryFilter);
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        });
-        trendingCategoriesContainer.appendChild(btn);
-      });
-    }
-
-    // Event listeners for nav links (desktop and mobile)
-    function setupNavLinks() {
-      const navLinks = document.querySelectorAll("[data-page]");
-      navLinks.forEach((link) => {
-        link.addEventListener("click", async (e) => {
-          e.preventDefault();
-          const pageKey = link.getAttribute("data-page");
-          await changePage(pageKey);
-          // Scroll top on page change
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        });
-      });
-    }
-
-    // Pagination buttons
-    prevPageBtn.addEventListener("click", async () => {
-      if (currentPage > 1) {
-        currentPage--;
-        const prevToken = prevPageTokens.length > 1 ? prevPageTokens[prevPageTokens.length - 2] : null;
-        prevPageTokens.pop();
-        await fetchPosts(prevToken, pages[currentPageKey].trendingSort, currentCategoryFilter);
-        updatePagination();
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
-    });
-
-    nextPageBtn.addEventListener("click", async () => {
-      if (nextPageToken) {
-        currentPage++;
-        prevPageTokens.push(nextPageToken);
-        await fetchPosts(nextPageToken, pages[currentPageKey].trendingSort, currentCategoryFilter);
-        updatePagination();
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
-    });
-
-    // Autocomplete search feature
-    // Debounce helper
-    function debounce(func, wait) {
-      let timeout;
-      return function (...args) {
-        clearTimeout(timeout);
-        timeout = setTimeout(() => func.apply(this, args), wait);
-      };
-    }
-
-    // Search posts by query using Blogger API
-    async function searchPosts(query) {
-      if (!query || query.trim().length < 2) {
-        return [];
-      }
-      try {
-        const url = `https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts/search?key=${API_KEY}&q=${encodeURIComponent(query)}&maxResults=10`;
-        const response = await fetch(url);
-        const data = await response.json();
-        if (data.items && data.items.length > 0) {
-          return data.items;
+        } catch (e) {
+          app.innerHTML = `<p class="text-center text-red-600">Gagal memuat video trending.</p>`;
         }
-        return [];
-      } catch (error) {
-        console.error("Error searching posts:", error);
-        return [];
-      }
-    }
+      } else if (page === "subscriptions") {
+        app.innerHTML = `<h2 class="text-xl font-semibold mb-6">Subscriptions</h2>` + renderLoading();
+        try {
+          const videos = await fetchSubscriptionsVideos(16);
+          app.innerHTML = `<h2 class="text-xl font-semibold mb-6">Subscriptions</h2>` + renderVideoList(videos);
+        } catch (e) {
+          app.innerHTML = `<p class="text-center text-red-600">Gagal memuat video subscriptions.</p>`;
+        }
+      } else if (page === "search") {
+        const query = options.query || "";
+        if (!query) {
+          app.innerHTML = `<p class="text-center text-gray-600">Masukkan kata kunci pencarian.</p>`;
+          return;
+        }
+        app.innerHTML = `<h2 class="text-xl font-semibold mb-6">Hasil pencarian untuk "${query}"</h2>` + renderLoading();
+        try {
+          const videos = await fetchVideosBySearch(query, 24);
+          app.innerHTML = `<h2 class="text-xl font-semibold mb-6">Hasil pencarian untuk "${query}"</h2>` + renderVideoList(videos);
+        } catch (e) {
+          app.innerHTML = `<p class="text-center text-red-600">Gagal memuat hasil pencarian.</p>`;
+        }
+      } else if (page === "video") {
+        const videoId = options.videoId;
+        if (!videoId) {
+          app.innerHTML = `<p class="text-center text-gray-600">Video tidak ditemukan.</p>`;
+          return;
+        }
+        app.innerHTML = renderLoading();
+        try {
+          const url = `${YOUTUBE_API}/videos?part=snippet,statistics,contentDetails&id=${videoId}&key=${API_KEY}`;
+          const res = await fetch(url);
+          const data = await res.json();
+          if (!data.items || !data.items[0]) {
+            app.innerHTML = `<p class="text-center text-gray-600">Video tidak ditemukan.</p>`;
+            return;
+          }
+          const video = data.items[0];
 
-    // Render autocomplete suggestions
-    function renderAutocomplete(posts) {
-      autocompleteList.innerHTML = "";
-      if (posts.length === 0) {
-        autocompleteList.classList.add("hidden");
-        return;
-      }
-      posts.forEach((post) => {
-        const li = document.createElement("li");
-        li.setAttribute("role", "option");
-        li.setAttribute("tabindex", "-1");
-        li.className = "px-4 py-2 cursor-pointer hover:bg-black hover:text-white text-black";
-        li.textContent = post.title;
-        li.addEventListener("click", () => {
-          showArticleDetail(post.id);
-          autocompleteList.classList.add("hidden");
-          searchInput.value = "";
+          // Fetch related videos for recommendations
+          let recommendations = await fetchRelatedVideos(videoId, 20);
+          if (recommendations.length < 8) {
+            // Fallback: popular videos excluding current video
+            let popular = await fetchPopularVideos(20);
+            popular = popular.filter((v) => v.id !== videoId);
+            recommendations = [...recommendations, ...popular].slice(0, 8);
+          } else {
+            recommendations = recommendations.slice(0, 8);
+          }
+
+          // Fetch popular channels for channel slider
+          const channels = await fetchPopularChannels(10);
+
+          app.innerHTML = renderVideoPlayerPage(video, recommendations, channels);
+
+          // Add back button event
+          const backButton = document.getElementById("back-button");
+          const videoPlayerContainer = document.getElementById("video-player-container");
+          const minimizeButton = document.getElementById("minimize-button");
+          const expandButton = document.getElementById("expand-button");
+          const fullscreenButton = document.getElementById("fullscreen-button");
+          const exitFullscreenButton = document.getElementById("exit-fullscreen-button");
+          const toggleDescriptionBtn = document.getElementById("toggle-description");
+          const videoDescription = document.getElementById("video-description");
+          const channelLink = document.getElementById("channel-link");
+
+          const subscribeButton = document.getElementById("subscribe-button");
+          const likeButton = document.getElementById("like-button");
+          const dislikeButton = document.getElementById("dislike-button");
+          const shareButton = document.getElementById("share-button");
+
+          backButton.addEventListener("click", () => {
+            if (history.length > 1) {
+              history.back();
+            } else {
+              showPage("home");
+              history.replaceState({ page: "home" }, "", "#home");
+            }
+          });
+
+          // Minimize/Expand toggle
+          minimizeButton.addEventListener("click", () => {
+            videoPlayerContainer.classList.add("minimized");
+            minimizeButton.classList.add("hidden");
+            expandButton.classList.remove("hidden");
+          });
+          expandButton.addEventListener("click", () => {
+            videoPlayerContainer.classList.remove("minimized");
+            minimizeButton.classList.remove("hidden");
+            expandButton.classList.add("hidden");
+          });
+
+          // Fullscreen toggle
+          fullscreenButton.addEventListener("click", () => {
+            if (videoPlayerContainer.requestFullscreen) {
+              videoPlayerContainer.requestFullscreen();
+            } else if (videoPlayerContainer.webkitRequestFullscreen) {
+              videoPlayerContainer.webkitRequestFullscreen();
+            } else if (videoPlayerContainer.msRequestFullscreen) {
+              videoPlayerContainer.msRequestFullscreen();
+            }
+          });
+          exitFullscreenButton.addEventListener("click", () => {
+            if (document.exitFullscreen) {
+              document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+              document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) {
+              document.msExitFullscreen();
+            }
+          });
+
+          // Listen fullscreen change to toggle buttons
+          function onFullScreenChange() {
+            const isFullscreen = !!(
+              document.fullscreenElement ||
+              document.webkitFullscreenElement ||
+              document.msFullscreenElement
+            );
+            if (isFullscreen) {
+              videoPlayerContainer.classList.add("fullscreen");
+              fullscreenButton.classList.add("hidden");
+              exitFullscreenButton.classList.remove("hidden");
+            } else {
+              videoPlayerContainer.classList.remove("fullscreen");
+              fullscreenButton.classList.remove("hidden");
+              exitFullscreenButton.classList.add("hidden");
+            }
+          }
+          document.addEventListener("fullscreenchange", onFullScreenChange);
+          document.addEventListener("webkitfullscreenchange", onFullScreenChange);
+          document.addEventListener("msfullscreenchange", onFullScreenChange);
+
+          // Clicking minimized player expands it
+          videoPlayerContainer.addEventListener("click", (e) => {
+            if (videoPlayerContainer.classList.contains("minimized")) {
+              if (!e.target.closest(".controls")) {
+                videoPlayerContainer.classList.remove("minimized");
+                minimizeButton.classList.remove("hidden");
+                expandButton.classList.add("hidden");
+              }
+            }
+          });
+
+          // Description toggle
+          toggleDescriptionBtn.addEventListener("click", () => {
+            const expanded = videoDescription.classList.toggle("expanded");
+            toggleDescriptionBtn.textContent = expanded ? "Lihat lebih sedikit" : "Lihat semua";
+            toggleDescriptionBtn.setAttribute("aria-expanded", expanded.toString());
+          });
+
+          // Channel link click
+          channelLink.addEventListener("click", (e) => {
+            e.preventDefault();
+            const channelId = channelLink.getAttribute("data-channel-id");
+            if (channelId) {
+              history.pushState({ page: "channel", channelId }, "", `#channel?id=${channelId}`);
+              showPage("channel", { channelId });
+              window.scrollTo(0, 0);
+            }
+          });
+
+          // Channel slider click
+          const channelSlider = document.getElementById("channel-slider");
+          if (channelSlider) {
+            channelSlider.querySelectorAll(".channel-card").forEach(card => {
+              card.addEventListener("click", () => {
+                const channelId = card.getAttribute("data-channel-id");
+                if (channelId) {
+                  history.pushState({ page: "channel", channelId }, "", `#channel?id=${channelId}`);
+                  showPage("channel", { channelId });
+                  window.scrollTo(0, 0);
+                }
+              });
+              card.addEventListener("keydown", (e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  const channelId = card.getAttribute("data-channel-id");
+                  if (channelId) {
+                    history.pushState({ page: "channel", channelId }, "", `#channel?id=${channelId}`);
+                    showPage("channel", { channelId });
+                    window.scrollTo(0, 0);
+                  }
+                }
+              });
+            });
+          }
+
+          // Subscribe button logic
+          subscribeButton.addEventListener("click", () => {
+            const subscribed = subscribeButton.getAttribute("aria-pressed") === "true";
+            if (subscribed) {
+              subscribeButton.setAttribute("aria-pressed", "false");
+              subscribeButton.textContent = "Subscribe";
+              subscribeButton.prepend(createIcon("fas fa-bell"));
+            } else {
+              subscribeButton.setAttribute("aria-pressed", "true");
+              subscribeButton.textContent = "Subscribed";
+              subscribeButton.prepend(createIcon("fas fa-bell"));
+            }
+          });
+
+          // Like button logic
+          likeButton.addEventListener("click", () => {
+            const liked = likeButton.classList.contains("liked");
+            if (liked) {
+              likeButton.classList.remove("liked");
+              likeButton.setAttribute("aria-pressed", "false");
+            } else {
+              likeButton.classList.add("liked");
+              likeButton.setAttribute("aria-pressed", "true");
+              // Remove dislike if active
+              dislikeButton.classList.remove("liked");
+              dislikeButton.setAttribute("aria-pressed", "false");
+            }
+          });
+
+          // Dislike button logic
+          dislikeButton.addEventListener("click", () => {
+            const disliked = dislikeButton.classList.contains("liked");
+            if (disliked) {
+              dislikeButton.classList.remove("liked");
+              dislikeButton.setAttribute("aria-pressed", "false");
+            } else {
+              dislikeButton.classList.add("liked");
+              dislikeButton.setAttribute("aria-pressed", "true");
+              // Remove like if active
+              likeButton.classList.remove("liked");
+              likeButton.setAttribute("aria-pressed", "false");
+            }
+          });
+
+          // Share button logic
+          shareButton.addEventListener("click", () => {
+            const shareUrl = window.location.href;
+            if (navigator.clipboard) {
+              navigator.clipboard.writeText(shareUrl).then(() => {
+                alert("Link video disalin ke clipboard!");
+              }, () => {
+                alert("Gagal menyalin link.");
+              });
+            } else {
+              prompt("Salin link video:", shareUrl);
+            }
+          });
+
+        } catch (e) {
+          app.innerHTML = `<p class="text-center text-red-600">Gagal memuat video.</p>`;
+        }
+      } else if (page === "channel") {
+        const channelId = options.channelId;
+        if (!channelId) {
+          app.innerHTML = `<p class="text-center text-gray-600">Channel tidak ditemukan.</p>`;
+          return;
+        }
+        app.innerHTML = renderLoading();
+        try {
+          // Fetch channel details
+          const channelUrl = `${YOUTUBE_API}/channels?part=snippet,statistics,brandingSettings,contentDetails&id=${channelId}&key=${API_KEY}`;
+          const channelRes = await fetch(channelUrl);
+          const channelData = await channelRes.json();
+          if (!channelData.items || !channelData.items[0]) {
+            app.innerHTML = `<p class="text-center text-gray-600">Channel tidak ditemukan.</p>`;
+            return;
+          }
+          const channel = channelData.items[0];
+
+          // Fetch channel videos
+          const uploadsPlaylistId = channel.contentDetails?.relatedPlaylists?.uploads;
+          let videos = [];
+          if (uploadsPlaylistId) {
+            const playlistUrl = `${YOUTUBE_API}/playlistItems?part=snippet&maxResults=16&playlistId=${uploadsPlaylistId}&key=${API_KEY}`;
+            const playlistRes = await fetch(playlistUrl);
+            const playlistData = await playlistRes.json();
+            if (playlistData.items) {
+              const videoIds = playlistData.items.map(item => item.snippet.resourceId.videoId).join(",");
+              if (videoIds) {
+                const videosUrl = `${YOUTUBE_API}/videos?part=snippet,statistics,contentDetails&id=${videoIds}&key=${API_KEY}`;
+                const videosRes = await fetch(videosUrl);
+                const videosData = await videosRes.json();
+                videos = videosData.items || [];
+              }
+            }
+          }
+
+          app.innerHTML = renderChannelViewPage(channel, videos);
+
+          // Subscribe, like, dislike, share button logic (simulate)
+          const subscribeButton = document.getElementById("subscribe-button");
+          const likeButton = document.getElementById("like-button");
+          const dislikeButton = document.getElementById("dislike-button");
+          const shareButton = document.getElementById("share-button");
+
+          subscribeButton.addEventListener("click", () => {
+            const subscribed = subscribeButton.getAttribute("aria-pressed") === "true";
+            if (subscribed) {
+              subscribeButton.setAttribute("aria-pressed", "false");
+              subscribeButton.textContent = "Subscribe";
+              subscribeButton.prepend(createIcon("fas fa-bell"));
+            } else {
+              subscribeButton.setAttribute("aria-pressed", "true");
+              subscribeButton.textContent = "Subscribed";
+              subscribeButton.prepend(createIcon("fas fa-bell"));
+            }
+          });
+
+          likeButton.addEventListener("click", () => {
+            const liked = likeButton.classList.contains("liked");
+            if (liked) {
+              likeButton.classList.remove("liked");
+              likeButton.setAttribute("aria-pressed", "false");
+            } else {
+              likeButton.classList.add("liked");
+              likeButton.setAttribute("aria-pressed", "true");
+              // Remove dislike if active
+              dislikeButton.classList.remove("liked");
+              dislikeButton.setAttribute("aria-pressed", "false");
+            }
+          });
+
+          dislikeButton.addEventListener("click", () => {
+            const disliked = dislikeButton.classList.contains("liked");
+            if (disliked) {
+              dislikeButton.classList.remove("liked");
+              dislikeButton.setAttribute("aria-pressed", "false");
+            } else {
+              dislikeButton.classList.add("liked");
+              dislikeButton.setAttribute("aria-pressed", "true");
+              // Remove like if active
+              likeButton.classList.remove("liked");
+              likeButton.setAttribute("aria-pressed", "false");
+            }
+          });
+
+          shareButton.addEventListener("click", () => {
+            const shareUrl = window.location.href;
+            if (navigator.clipboard) {
+              navigator.clipboard.writeText(shareUrl).then(() => {
+                alert("Link channel disalin ke clipboard!");
+              }, () => {
+                alert("Gagal menyalin link.");
+              });
+            } else {
+              prompt("Salin link channel:", shareUrl);
+            }
+          });
+
+          // Comments logic (simulate with localStorage)
+          const commentForm = document.getElementById("comment-form");
+          const commentTextarea = document.getElementById("comment-textarea");
+          const commentsList = document.getElementById("comments-list");
+
+          const storageKey = `comments_${channelId}`;
+          let comments = JSON.parse(localStorage.getItem(storageKey)) || [];
+
+          function renderComments() {
+            if (comments.length === 0) {
+              commentsList.innerHTML = `<p class="text-gray-600">Belum ada komentar.</p>`;
+              return;
+            }
+            commentsList.innerHTML = comments.map(comment => `
+              <article class="comment" tabindex="0" aria-label="Komentar oleh ${comment.author} pada ${comment.date}">
+                <div class="comment-avatar" aria-hidden="true">
+                  <img src="${comment.avatar}" alt="Avatar pengguna ${comment.author}" loading="lazy" />
+                </div>
+                <div class="comment-content">
+                  <div class="comment-header">
+                    <span class="comment-author">${comment.author}</span>
+                    <time class="comment-date" datetime="${comment.dateISO}">${comment.date}</time>
+                  </div>
+                  <p class="comment-text">${linkify(comment.text)}</p>
+                  <div class="comment-actions">
+                    <button class="like-btn" aria-label="Like komentar" data-id="${comment.id}">
+                      <i class="fas fa-thumbs-up"></i> <span>${comment.likes || 0}</span>
+                    </button>
+                    <button class="dislike-btn" aria-label="Dislike komentar" data-id="${comment.id}">
+                      <i class="fas fa-thumbs-down"></i> <span>${comment.dislikes || 0}</span>
+                    </button>
+                  </div>
+                </div>
+              </article>
+            `).join("");
+            // Add event listeners for like/dislike buttons
+            commentsList.querySelectorAll(".like-btn").forEach(btn => {
+              btn.addEventListener("click", () => {
+                const id = btn.getAttribute("data-id");
+                const comment = comments.find(c => c.id === id);
+                if (!comment) return;
+                comment.likes = (comment.likes || 0) + 1;
+                localStorage.setItem(storageKey, JSON.stringify(comments));
+                renderComments();
+              });
+            });
+            commentsList.querySelectorAll(".dislike-btn").forEach(btn => {
+              btn.addEventListener("click", () => {
+                const id = btn.getAttribute("data-id");
+                const comment = comments.find(c => c.id === id);
+                if (!comment) return;
+                comment.dislikes = (comment.dislikes || 0) + 1;
+                localStorage.setItem(storageKey, JSON.stringify(comments));
+                renderComments();
+              });
+            });
+          }
+
+          renderComments();
+
+          commentForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const text = commentTextarea.value.trim();
+            if (!text) return;
+            const newComment = {
+              id: Date.now().toString(),
+              author: "Pengguna",
+              avatar: "https://placehold.co/48x48?text=U",
+              text,
+              date: new Date().toLocaleString(),
+              dateISO: new Date().toISOString(),
+              likes: 0,
+              dislikes: 0,
+            };
+            comments.unshift(newComment);
+            localStorage.setItem(storageKey, JSON.stringify(comments));
+            commentTextarea.value = "";
+            renderComments();
+          });
+
+        } catch (e) {
+          app.innerHTML = `<p class="text-center text-red-600">Gagal memuat channel.</p>`;
+        }
+      } else if (page === "shorts") {
+        // Render vertical shorts page with infinite scroll and transparent header
+        app.innerHTML = renderShortsVerticalPage([]);
+        const shortsContainer = document.getElementById("shorts-vertical-video-list");
+        const shortsBackButton = document.getElementById("shorts-back-button");
+        const shortsSearchForm = document.getElementById("shorts-search-form");
+        const shortsSearchInput = document.getElementById("shorts-search-input");
+        const shortsAutocompleteList = document.getElementById("shorts-vertical-autocomplete-list");
+        const shortsLoadingSpinner = document.getElementById("shorts-loading-spinner");
+
+        let shortsVideos = [];
+        let nextPageToken = null;
+        let isLoading = false;
+        let isEnd = false;
+
+        // Load initial shorts
+        async function loadShorts(initial = false) {
+          if (isLoading || isEnd) return;
+          isLoading = true;
+          shortsLoadingSpinner.classList.remove("hidden");
+          try {
+            const { items, nextPageToken: nextToken } = await fetchShortsVideos(10, nextPageToken);
+            if (items.length === 0) {
+              isEnd = true;
+            } else {
+              shortsVideos = shortsVideos.concat(items);
+              nextPageToken = nextToken;
+              renderShortsVideos();
+            }
+          } catch {
+            // ignore errors
+          } finally {
+            isLoading = false;
+            shortsLoadingSpinner.classList.add("hidden");
+          }
+        }
+
+        // Render shorts videos in vertical container
+        function renderShortsVideos() {
+          shortsContainer.innerHTML = shortsVideos.map(video => {
+            const { id, snippet } = video;
+            const title = snippet.title;
+            const channelTitle = snippet.channelTitle;
+            return `
+              <article class="shorts-video-item" data-video-id="${id}" tabindex="0" aria-label="Video short berjudul ${title} oleh channel ${channelTitle}">
+                <iframe
+                  src="https://www.youtube.com/embed/${id}?autoplay=0&mute=1&controls=0&modestbranding=1&rel=0&showinfo=0&playsinline=1"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                  title="${title}"
+                  loading="lazy"
+                  aria-hidden="true"
+                ></iframe>
+                <div class="shorts-video-info">${title}</div>
+                <div class="shorts-video-channel">${channelTitle}</div>
+              </article>
+            `;
+          }).join('');
+        }
+
+        // Back button event
+        shortsBackButton.addEventListener("click", (e) => {
+          e.preventDefault();
+          if (history.length > 1) {
+            history.back();
+          } else {
+            showPage("home");
+            history.replaceState({ page: "home" }, "", "#home");
+          }
         });
-        autocompleteList.appendChild(li);
-      });
-      autocompleteList.classList.remove("hidden");
+
+        // Infinite scroll handler
+        shortsContainer.addEventListener("scroll", () => {
+          if (isLoading || isEnd) return;
+          const scrollTop = shortsContainer.scrollTop;
+          const scrollHeight = shortsContainer.scrollHeight;
+          const clientHeight = shortsContainer.clientHeight;
+          if (scrollTop + clientHeight >= scrollHeight - 300) {
+            loadShorts();
+          }
+        });
+
+        // Autocomplete for shorts search
+        let shortsAutocompleteTimeout = null;
+        shortsSearchInput.addEventListener("input", () => {
+          const query = shortsSearchInput.value.trim();
+          if (shortsAutocompleteTimeout) clearTimeout(shortsAutocompleteTimeout);
+          if (!query) {
+            clearShortsAutocomplete();
+            return;
+          }
+          shortsAutocompleteTimeout = setTimeout(() => {
+            fetchShortsAutocompleteSuggestions(query);
+          }, 300);
+        });
+
+        shortsSearchInput.addEventListener("keydown", (e) => {
+          const items = shortsAutocompleteList.querySelectorAll("div");
+          if (!items.length) return;
+          let currentIndex = Array.from(items).findIndex((item) =>
+            item.classList.contains("autocomplete-active")
+          );
+          if (e.key === "ArrowDown") {
+            e.preventDefault();
+            if (currentIndex < items.length - 1) {
+              if (currentIndex >= 0) items[currentIndex].classList.remove("autocomplete-active");
+              items[currentIndex + 1].classList.add("autocomplete-active");
+              items[currentIndex + 1].scrollIntoView({ block: "nearest" });
+            } else if (currentIndex === -1) {
+              items[0].classList.add("autocomplete-active");
+              items[0].scrollIntoView({ block: "nearest" });
+            }
+          } else if (e.key === "ArrowUp") {
+            e.preventDefault();
+            if (currentIndex > 0) {
+              items[currentIndex].classList.remove("autocomplete-active");
+              items[currentIndex - 1].classList.add("autocomplete-active");
+              items[currentIndex - 1].scrollIntoView({ block: "nearest" });
+            }
+          } else if (e.key === "Enter") {
+            if (currentIndex >= 0) {
+              e.preventDefault();
+              selectShortsAutocompleteItem(items[currentIndex]);
+            }
+          } else if (e.key === "Escape") {
+            clearShortsAutocomplete();
+          }
+        });
+
+        document.addEventListener("click", (e) => {
+          if (!shortsSearchForm.contains(e.target)) {
+            clearShortsAutocomplete();
+          }
+        });
+
+        function clearShortsAutocomplete() {
+          shortsAutocompleteList.innerHTML = "";
+          shortsAutocompleteList.style.display = "none";
+          shortsSearchInput.setAttribute("aria-expanded", "false");
+        }
+
+        async function fetchShortsAutocompleteSuggestions(query) {
+          // Use YouTube search API to get suggestions (max 8)
+          const searchUrl = `${YOUTUBE_API}/search?part=snippet&maxResults=8&q=${encodeURIComponent(
+            query
+          )}&type=video&key=${API_KEY}`;
+          try {
+            const res = await fetch(searchUrl);
+            const data = await res.json();
+            if (!data.items || data.items.length === 0) {
+              clearShortsAutocomplete();
+              return;
+            }
+            renderShortsAutocompleteList(data.items);
+          } catch {
+            clearShortsAutocomplete();
+          }
+        }
+
+        function renderShortsAutocompleteList(items) {
+          shortsAutocompleteList.innerHTML = items
+            .map(
+              (item) => `
+              <div role="option" tabindex="-1" data-video-id="${item.id.videoId}" data-title="${item.snippet.title}" aria-selected="false">
+                <span class="font-semibold">${item.snippet.title}</span><br/>
+                <small class="text-gray-500">${item.snippet.channelTitle}</small>
+              </div>
+            `
+            )
+            .join("");
+          shortsAutocompleteList.style.display = "block";
+          shortsSearchInput.setAttribute("aria-expanded", "true");
+
+          const children = shortsAutocompleteList.querySelectorAll("div");
+          children.forEach((child) => {
+            child.addEventListener("click", () => {
+              selectShortsAutocompleteItem(child);
+            });
+            child.addEventListener("mouseenter", () => {
+              children.forEach((c) => c.classList.remove("autocomplete-active"));
+              child.classList.add("autocomplete-active");
+            });
+          });
+        }
+
+        function selectShortsAutocompleteItem(item) {
+          const videoId = item.getAttribute("data-video-id");
+          const title = item.getAttribute("data-title");
+          if (videoId) {
+            history.pushState({ page: "video", videoId }, "", `#video?id=${videoId}`);
+            showPage("video", { videoId });
+            clearShortsAutocomplete();
+            shortsSearchInput.value = "";
+            window.scrollTo(0, 0);
+          } else if (title) {
+            history.pushState({ page: "search", query: title }, "", `#search?query=${encodeURIComponent(title)}`);
+            showPage("search", { query: title });
+            clearShortsAutocomplete();
+            shortsSearchInput.value = "";
+          }
+        }
+
+        // Shorts search form submit
+        shortsSearchForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const query = shortsSearchInput.value.trim();
+          if (!query) return;
+          history.pushState({ page: "search", query }, "", `#search?query=${encodeURIComponent(query)}`);
+          showPage("search", { query });
+          shortsSearchInput.value = "";
+          clearShortsAutocomplete();
+        });
+
+        // Load initial shorts videos
+        await loadShorts();
+
+      }
     }
 
-    // Handle input event for autocomplete
-    const handleSearchInput = debounce(async (e) => {
-      const query = e.target.value;
-      if (query.length < 2) {
-        autocompleteList.classList.add("hidden");
-        return;
+    // Fetch related videos by videoId using YouTube search API with video title keywords
+    async function fetchRelatedVideos(videoId, maxResults = 20) {
+      try {
+        // First get video details to extract tags and title
+        const videoUrl = `${YOUTUBE_API}/videos?part=snippet&id=${videoId}&key=${API_KEY}`;
+        const videoRes = await fetch(videoUrl);
+        const videoData = await videoRes.json();
+        if (!videoData.items || !videoData.items[0]) return [];
+
+        const video = videoData.items[0];
+        const snippet = video.snippet;
+        const tags = snippet.tags || [];
+        const title = snippet.title || "";
+
+        // Build search query from tags or title keywords
+        let query = "";
+        if (tags.length > 0) {
+          query = tags.slice(0, 5).join(" ");
+        } else {
+          // Use top 5 keywords from title (split by space, remove short words)
+          const words = title.split(/\s+/).filter(w => w.length > 3);
+          query = words.slice(0, 5).join(" ");
+        }
+        if (!query) return [];
+
+        // Search videos with query, exclude current videoId
+        const searchUrl = `${YOUTUBE_API}/search?part=snippet&maxResults=${maxResults * 2}&q=${encodeURIComponent(query)}&type=video&key=${API_KEY}`;
+        const searchRes = await fetch(searchUrl);
+        const searchData = await searchRes.json();
+        if (!searchData.items) return [];
+
+        // Filter out current video and get video IDs
+        const filteredItems = searchData.items.filter(item => item.id.videoId !== videoId);
+        const videoIds = filteredItems.map(item => item.id.videoId).slice(0, maxResults).join(",");
+        if (!videoIds) return [];
+
+        // Get full video details
+        const videosUrl = `${YOUTUBE_API}/videos?part=snippet,statistics,contentDetails&id=${videoIds}&key=${API_KEY}`;
+        const videosRes = await fetch(videosUrl);
+        const videosData = await videosRes.json();
+        return videosData.items || [];
+      } catch {
+        return [];
       }
-      const results = await searchPosts(query);
-      renderAutocomplete(results);
-    }, 300);
+    }
 
-    searchInput.addEventListener("input", handleSearchInput);
+    // Fetch popular channels (simulate by searching popular videos and extracting unique channels)
+    async function fetchPopularChannels(maxResults = 10) {
+      try {
+        const videos = await fetchPopularVideos(50);
+        const uniqueChannelsMap = new Map();
+        for (const video of videos) {
+          const channelId = video.snippet.channelId;
+          if (!uniqueChannelsMap.has(channelId)) {
+            uniqueChannelsMap.set(channelId, {
+              id: channelId,
+              snippet: {
+                title: video.snippet.channelTitle,
+                thumbnails: {
+                  default: {
+                    url: `https://placehold.co/72x72?text=${encodeURIComponent(video.snippet.channelTitle.charAt(0))}`
+                  }
+                }
+              }
+            });
+          }
+          if (uniqueChannelsMap.size >= maxResults) break;
+        }
+        // For each channel, fetch real channel thumbnails
+        const channelIds = Array.from(uniqueChannelsMap.keys()).join(",");
+        if (!channelIds) return [];
+        const url = `${YOUTUBE_API}/channels?part=snippet&id=${channelIds}&key=${API_KEY}`;
+        const res = await fetch(url);
+        const data = await res.json();
+        if (!data.items) return Array.from(uniqueChannelsMap.values());
+        return data.items;
+      } catch {
+        return [];
+      }
+    }
 
-    // Hide autocomplete on outside click
-    document.addEventListener("click", (e) => {
-      if (!searchInput.contains(e.target) && !autocompleteList.contains(e.target)) autocompleteList.classList.add("hidden");
+    // Handle nav link clicks (header)
+    navLinks.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const page = link.getAttribute("data-page");
+        history.pushState({ page }, "", `#${page}`);
+        showPage(page);
+      });
+    });
+    // Handle sidebar clicks
+    sidebarLinks.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const page = link.getAttribute("data-page");
+        history.pushState({ page }, "", `#${page}`);
+        showPage(page);
+      });
+    });
+    // Handle bottom nav clicks
+    bottomNavLinks.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const page = link.getAttribute("data-page");
+        history.pushState({ page }, "", `#${page}`);
+        showPage(page);
+      });
     });
 
-    // Slider functions
-    function startSlider() {
-      if (sliderInterval) return; // Already running
-      sliderIndex = 0;
-      updateSlider();
-      sliderInterval = setInterval(() => {
-        sliderIndex++;
-        updateSlider();
-      }, 5000);
-    }
-    function stopSlider() {
-      if (sliderInterval) {
-        clearInterval(sliderInterval);
-        sliderInterval = null;
+    // Handle search form submit
+    searchForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const query = searchInput.value.trim();
+      if (!query) return;
+      history.pushState({ page: "search", query }, "", `#search?query=${encodeURIComponent(query)}`);
+      showPage("search", { query });
+      searchInput.value = "";
+      clearAutocomplete();
+    });
+
+    // Handle clicks on video cards (event delegation)
+    app.addEventListener("click", (e) => {
+      const videoCard = e.target.closest(".video-card, .recommendation-card, .slide, .short-card");
+      if (videoCard) {
+        e.preventDefault();
+        const videoId = videoCard.getAttribute("data-video-id");
+        if (videoId) {
+          history.pushState({ page: "video", videoId }, "", `#video?id=${videoId}`);
+          showPage("video", { videoId });
+          window.scrollTo(0, 0);
+        }
       }
-    }
-    function updateSlider() {
-      const slidesCount = sliderWrapper.children.length;
-      if (sliderIndex >= slidesCount) sliderIndex = 0;
-      sliderWrapper.style.transform = `translateX(-${sliderIndex * 100}%)`;
+    });
+
+    // Parse URL hash and query params
+    function parseHash() {
+      const hash = location.hash.slice(1);
+      if (!hash) return { page: "home" };
+      const [pagePart, queryPart] = hash.split("?");
+      const page = pagePart || "home";
+      const params = {};
+      if (queryPart) {
+        queryPart.split("&").forEach((param) => {
+          const [key, value] = param.split("=");
+          params[key] = decodeURIComponent(value);
+        });
+      }
+      return { page, params };
     }
 
-    // Initialize
-    setupNavLinks();
-    changePage("beranda");
+    // On popstate (back/forward)
+    window.addEventListener("popstate", () => {
+      const { page, params } = parseHash();
+      if (page === "search") {
+        showPage(page, { query: params.query || "" });
+      } else if (page === "video") {
+        showPage(page, { videoId: params.id || "" });
+      } else if (page === "trending") {
+        showPage(page, { categoryId: params.categoryId || "" });
+      } else if (page === "shorts") {
+        showPage(page);
+      } else if (page === "channel") {
+        showPage(page, { channelId: params.id || "" });
+      } else {
+        showPage(page);
+      }
+    });
+
+    // Autocomplete search implementation
+    let autocompleteTimeout = null;
+    searchInput.addEventListener("input", () => {
+      const query = searchInput.value.trim();
+      if (autocompleteTimeout) clearTimeout(autocompleteTimeout);
+      if (!query) {
+        clearAutocomplete();
+        return;
+      }
+      autocompleteTimeout = setTimeout(() => {
+        fetchAutocompleteSuggestions(query);
+      }, 300);
+    });
+
+    searchInput.addEventListener("keydown", (e) => {
+      const items = autocompleteList.querySelectorAll("div");
+      if (!items.length) return;
+      let currentIndex = Array.from(items).findIndex((item) =>
+        item.classList.contains("autocomplete-active")
+      );
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        if (currentIndex < items.length - 1) {
+          if (currentIndex >= 0) items[currentIndex].classList.remove("autocomplete-active");
+          items[currentIndex + 1].classList.add("autocomplete-active");
+          items[currentIndex + 1].scrollIntoView({ block: "nearest" });
+        } else if (currentIndex === -1) {
+          items[0].classList.add("autocomplete-active");
+          items[0].scrollIntoView({ block: "nearest" });
+        }
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        if (currentIndex > 0) {
+          items[currentIndex].classList.remove("autocomplete-active");
+          items[currentIndex - 1].classList.add("autocomplete-active");
+          items[currentIndex - 1].scrollIntoView({ block: "nearest" });
+        }
+      } else if (e.key === "Enter") {
+        if (currentIndex >= 0) {
+          e.preventDefault();
+          selectAutocompleteItem(items[currentIndex]);
+        }
+      } else if (e.key === "Escape") {
+        clearAutocomplete();
+      }
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!searchForm.contains(e.target)) {
+        clearAutocomplete();
+      }
+    });
+
+    function clearAutocomplete() {
+      autocompleteList.innerHTML = "";
+      autocompleteList.classList.add("hidden");
+      searchInput.setAttribute("aria-expanded", "false");
+    }
+
+    async function fetchAutocompleteSuggestions(query) {
+      // Use YouTube search API to get suggestions (max 8)
+      const searchUrl = `${YOUTUBE_API}/search?part=snippet&maxResults=8&q=${encodeURIComponent(
+        query
+      )}&type=video&key=${API_KEY}`;
+      try {
+        const res = await fetch(searchUrl);
+        const data = await res.json();
+        if (!data.items || data.items.length === 0) {
+          clearAutocomplete();
+          return;
+        }
+        renderAutocompleteList(data.items);
+      } catch {
+        clearAutocomplete();
+      }
+    }
+
+    function renderAutocompleteList(items) {
+      autocompleteList.innerHTML = items
+        .map(
+          (item) => `
+          <div role="option" tabindex="-1" data-video-id="${item.id.videoId}" data-title="${item.snippet.title}" aria-selected="false">
+            <span class="font-semibold">${item.snippet.title}</span><br/>
+            <small class="text-gray-500">${item.snippet.channelTitle}</small>
+          </div>
+        `
+        )
+        .join("");
+      autocompleteList.classList.remove("hidden");
+      searchInput.setAttribute("aria-expanded", "true");
+
+      const children = autocompleteList.querySelectorAll("div");
+      children.forEach((child) => {
+        child.addEventListener("click", () => {
+          selectAutocompleteItem(child);
+        });
+        child.addEventListener("mouseenter", () => {
+          children.forEach((c) => c.classList.remove("autocomplete-active"));
+          child.classList.add("autocomplete-active");
+        });
+      });
+    }
+
+    function selectAutocompleteItem(item) {
+      const videoId = item.getAttribute("data-video-id");
+      const title = item.getAttribute("data-title");
+      if (videoId) {
+        history.pushState({ page: "video", videoId }, "", `#video?id=${videoId}`);
+        showPage("video", { videoId });
+        clearAutocomplete();
+        searchInput.value = "";
+        window.scrollTo(0, 0);
+      } else if (title) {
+        history.pushState({ page: "search", query: title }, "", `#search?query=${encodeURIComponent(title)}`);
+        showPage("search", { query: title });
+        clearAutocomplete();
+        searchInput.value = "";
+      }
+    }
+
+    // Slider functionality
+    let sliderInterval = null;
+    function initSlider() {
+      const slider = document.getElementById("stream-slider");
+      if (!slider) return;
+      const slidesContainer = slider.querySelector(".slides");
+      const slides = slider.querySelectorAll(".slide");
+      if (slides.length <= 1) return;
+
+      let currentIndex = 0;
+
+      function showSlide(index) {
+        slidesContainer.style.transform = `translateX(-${index * 100}%)`;
+        currentIndex = index;
+      }
+
+      function nextSlide() {
+        let nextIndex = currentIndex + 1;
+        if (nextIndex >= slides.length) nextIndex = 0;
+        showSlide(nextIndex);
+      }
+
+      clearInterval(sliderInterval);
+      sliderInterval = setInterval(nextSlide, 4000);
+
+      // Pause on hover
+      slider.addEventListener("mouseenter", () => {
+        clearInterval(sliderInterval);
+      });
+      slider.addEventListener("mouseleave", () => {
+        sliderInterval = setInterval(nextSlide, 4000);
+      });
+    }
+
+    // Algorithm: Change popular videos based on time of day (morning, afternoon, evening, night)
+    async function fetchPopularVideosByTime(maxResults = 16) {
+      const hour = new Date().getHours();
+      let categoryId = "";
+      // Assign category based on time of day
+      if (hour >= 5 && hour < 12) {
+        // Morning: Education, Howto & Style
+        categoryId = "27"; // Pendidikan
+      } else if (hour >= 12 && hour < 17) {
+        // Afternoon: Entertainment, Music
+        categoryId = "24"; // Hiburan
+      } else if (hour >= 17 && hour < 21) {
+        // Evening: Film & Animation, Comedy
+        categoryId = "1"; // Film & Animasi
+      } else {
+        // Night: Gaming, Science & Technology
+        categoryId = "20"; // Game
+      }
+      return await fetchPopularVideos(maxResults, categoryId);
+    }
+
+    // Helper to create icon element for buttons
+    function createIcon(className) {
+      const i = document.createElement("i");
+      className.split(" ").forEach(c => i.classList.add(c));
+      return i;
+    }
+
+    // Initial load
+    (function init() {
+      const { page, params } = parseHash();
+      if (page === "search") {
+        showPage(page, { query: params.query || "" });
+      } else if (page === "video") {
+        showPage(page, { videoId: params.id || "" });
+      } else if (page === "trending") {
+        showPage(page, { categoryId: params.categoryId || "" });
+      } else if (page === "shorts") {
+        showPage(page);
+      } else if (page === "channel") {
+        showPage(page, { channelId: params.id || "" });
+      } else if (page === "home") {
+        // For home page, use time-based popular videos
+        app.innerHTML = `<h2 class="text-xl font-semibold mb-6">Video Populer</h2>` + renderLoading();
+        fetchPopularVideosByTime(16).then(videos => {
+          const sliderHTML = renderStreamSlider(videos);
+          app.innerHTML = `<h2 class="text-xl font-semibold mb-6">Video Populer</h2>${sliderHTML}` + renderVideoList(videos);
+          initSlider();
+        }).catch(() => {
+          app.innerHTML = `<p class="text-center text-red-600">Gagal memuat video populer.</p>`;
+        });
+      } else {
+        showPage("home");
+      }
+    })();
   </script>
- </body>
+</body>
 </html>
